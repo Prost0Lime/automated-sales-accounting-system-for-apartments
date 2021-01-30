@@ -9,31 +9,37 @@ from django.db import models
 
 
 class Client(models.Model):
-    kod_client = models.IntegerField(primary_key=True)
-    pasp = models.CharField(max_length=40)
-    fio_sotr = models.CharField(max_length=70)
-    phone = models.CharField(max_length=50)
-    status = models.CharField(max_length=20)
+    kod_client = models.IntegerField(primary_key=True,  verbose_name= "Код клиента")
+    pasp = models.CharField(max_length=40, verbose_name= "Паспорт")
+    fio_sotr = models.CharField(max_length=70, verbose_name= "ФИО")
+    phone = models.CharField(max_length=50, verbose_name= "Телефон")
+    status = models.CharField(max_length=20, verbose_name= "Статус")
+
+    def __str__(self):
+        return "<Client {kod_client}>".format(kod_client=self.kod_client)
 
     class Meta:
         managed = False
         db_table = 'client'
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'
 
 
 class DogovorProd(models.Model):
-    id_dog = models.AutoField(primary_key=True)
-    num_dog = models.IntegerField()
-    date_sost = models.DateField()
-    date_prod = models.DateField()
-    sum_dog = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
-    opl = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
-    id_zaya = models.ForeignKey('Zayavka', models.DO_NOTHING, db_column='id_zaya')
-    kod_sotrudn = models.ForeignKey('Sotrudn', models.DO_NOTHING, db_column='kod_sotrudn')
+    id_dog = models.AutoField(primary_key=True, verbose_name= "ИД договора")
+    num_dog = models.IntegerField(verbose_name= "Номер договора")
+    date_sost = models.DateField(verbose_name= "Дата составления")
+    date_prod = models.DateField(verbose_name= "Дата продажи")
+    sum_dog = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name= "Сумма по договору")
+    opl = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name= "Оплачено по договору")
+    id_zaya = models.ForeignKey('Zayavka', models.CASCADE, db_column='id_zaya', verbose_name= "ИД заявки")
+    kod_sotrudn = models.ForeignKey('Sotrudn', models.CASCADE, db_column='kod_sotrudn', verbose_name= "Код сотрудника")
 
     class Meta:
         managed = False
         db_table = 'dogovor_prod'
-
+        verbose_name = 'Договор продажи'
+        verbose_name_plural = 'Договоры продаж'
 
 class KategKvart(models.Model):
     kod_kategorii = models.IntegerField(primary_key=True)
@@ -86,7 +92,7 @@ class ProdKv(models.Model):
     id_prod = models.AutoField(primary_key=True)
     id_dog = models.ForeignKey(DogovorProd, models.DO_NOTHING, db_column='id_dog')
     id_kv = models.ForeignKey(Kvart, models.DO_NOTHING, db_column='id_kv')
-    stoim = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
+    stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
 
     class Meta:
         managed = False
