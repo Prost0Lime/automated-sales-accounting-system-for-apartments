@@ -8,40 +8,61 @@ from core.models import Client, DogovorProd, KategKvart, KnOplat, Kvart, ObjZast
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
     list_display = ["kod_client", "pasp", "fio_sotr", "phone", "status"]
-
+    list_filter = ["status"]
+    search_fields = ["pasp", "fio_sotr", "phone"]
+    ordering = ["kod_client"]
 
 @admin.register(DogovorProd)
 class DogovorProdAdmin(admin.ModelAdmin):
     list_display = ["id_dog", "num_dog", "date_sost", "date_prod", "sum_dog", "opl", "id_zaya", "kod_sotrudn"]
+    search_fields = ["num_dog", "date_sost", "id_zaya", "date_prod"]
+    list_filter = ["kod_sotrudn"]
+    ordering = ["id_dog"]
 
 @admin.register(KategKvart)
 class KategKvartAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["kod_kategorii", "naim_kat"]
+    ordering = ["kod_kategorii"]
 
 @admin.register(KnOplat)
 class KnOplatAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["id_oplt", "date_opl", "sum_opl", "id_dog"]
+    search_fields = ["date_opl", "id_dog"]
+    ordering = ["id_oplt"]
 
 @admin.register(Kvart)
 class KvartAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "num_obj", "kod_kategorii"]
+    list_filter = ["num_etag", "kol_vo_kom"]
+    ordering = ["id_kv"]
 
 @admin.register(ObjZastroi)
 class ObjZastroiAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["num_obj", "street", "num_zd", "kol_vo_et", "kod_vida"]
+    list_filter = ["street"]
+    ordering = ["num_obj"]
+
 
 @admin.register(ProdKv)
 class ProdKvAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["id_prod", "id_dog", "id_kv", "stoim"]
+    ordering = ["id_prod"]
 
 @admin.register(Sotrudn)
 class SotrudnAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["kod_sotrudn", "fio", "dolz"]
+    list_filter = ["dolz"]
+    search_fields = ["fio"]
+    ordering = ["kod_sotrudn"]
 
 @admin.register(VidJil)
 class VidJilAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["kod_vida", "naim_jil"]
+    search_fields = ["naim_jil"]
+    ordering = ["kod_vida"]
 
 @admin.register(Zayavka)
 class ZayavkaAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["id_zaya", "data_zaya", "opisanie", "kod_client", "kod_sotrudn"]
+    search_fields = ["data_zaya"]
+    ordering = ["id_zaya"]

@@ -32,8 +32,11 @@ class DogovorProd(models.Model):
     date_prod = models.DateField(verbose_name= "Дата продажи")
     sum_dog = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name= "Сумма по договору")
     opl = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name= "Оплачено по договору")
-    id_zaya = models.ForeignKey('Zayavka', models.CASCADE, db_column='id_zaya', verbose_name= "ИД заявки")
-    kod_sotrudn = models.ForeignKey('Sotrudn', models.CASCADE, db_column='kod_sotrudn', verbose_name= "Код сотрудника")
+    id_zaya = models.ForeignKey('Zayavka', models.CASCADE, db_column='id_zaya', verbose_name= "ИД заявки",
+                                related_name='dogovors')
+    kod_sotrudn = models.ForeignKey('Sotrudn', models.CASCADE,
+                                    db_column='kod_sotrudn', verbose_name= "Код сотрудника",
+                                    related_name='dogovors')
 
     class Meta:
         managed = False
@@ -42,89 +45,102 @@ class DogovorProd(models.Model):
         verbose_name_plural = 'Договоры продаж'
 
 class KategKvart(models.Model):
-    kod_kategorii = models.IntegerField(primary_key=True)
-    naim_kat = models.CharField(max_length=50)
+    kod_kategorii = models.IntegerField(primary_key=True, verbose_name= "Код категории")
+    naim_kat = models.CharField(max_length=50, verbose_name= "Наименование")
 
     class Meta:
         managed = False
         db_table = 'kateg_kvart'
+        verbose_name = 'Категория квартир'
+        verbose_name_plural = 'Категории квартир'
 
 
 class KnOplat(models.Model):
-    id_oplt = models.AutoField(primary_key=True)
-    date_opl = models.DateField()
-    sum_opl = models.IntegerField(blank=True, null=True)
-    id_dog = models.ForeignKey(DogovorProd, models.DO_NOTHING, db_column='id_dog')
+    id_oplt = models.AutoField(primary_key=True, verbose_name= "ИД оплаты")
+    date_opl = models.DateField(verbose_name= "Дата оплаты")
+    sum_opl = models.IntegerField(blank=True, null=True, verbose_name= "Сумма оплаты")
+    id_dog = models.ForeignKey(DogovorProd, models.CASCADE, db_column='id_dog', verbose_name= "ИД договора")
 
     class Meta:
         managed = False
         db_table = 'kn_oplat'
+        verbose_name = 'Книга оплат'
+        verbose_name_plural = 'Книга оплат'
+
 
 
 class Kvart(models.Model):
-    id_kv = models.AutoField(primary_key=True)
-    num_etag = models.IntegerField()
-    num_kv = models.CharField(max_length=50)
-    kol_vo_kom = models.IntegerField(blank=True, null=True)
-    area = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
-    stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
-    num_obj = models.ForeignKey('ObjZastroi', models.DO_NOTHING, db_column='num_obj')
-    kod_kategorii = models.ForeignKey(KategKvart, models.DO_NOTHING, db_column='kod_kategorii')
+    id_kv = models.AutoField(primary_key=True, verbose_name= "ИД квартиры")
+    num_etag = models.IntegerField(verbose_name= "Номер этажа")
+    num_kv = models.CharField(max_length=50, verbose_name= "Номер квартиры")
+    kol_vo_kom = models.IntegerField(blank=True, null=True, verbose_name= "Кол-во комнат")
+    area = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name= "Площадь")
+    stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name= "Стоимость")
+    num_obj = models.ForeignKey('ObjZastroi', models.CASCADE, db_column='num_obj', verbose_name= "Номер объекта")
+    kod_kategorii = models.ForeignKey(KategKvart, models.CASCADE, db_column='kod_kategorii', verbose_name= "Код категории")
 
     class Meta:
         managed = False
         db_table = 'kvart'
-
+        verbose_name = 'Квартира'
+        verbose_name_plural = 'Квартиры'
 
 class ObjZastroi(models.Model):
-    num_obj = models.IntegerField(primary_key=True)
-    street = models.CharField(max_length=70)
-    num_zd = models.CharField(max_length=20)
-    kol_vo_et = models.IntegerField()
-    kod_vida = models.ForeignKey('VidJil', models.DO_NOTHING, db_column='kod_vida')
+    num_obj = models.IntegerField(primary_key=True, verbose_name= "Номер объекта")
+    street = models.CharField(max_length=70, verbose_name= "Улица")
+    num_zd = models.CharField(max_length=20, verbose_name= "Номер здания")
+    kol_vo_et = models.IntegerField(verbose_name= "Кол-во этажей")
+    kod_vida = models.ForeignKey('VidJil', models.CASCADE, db_column='kod_vida', verbose_name= "Код вида")
 
     class Meta:
         managed = False
         db_table = 'obj_zastroi'
+        verbose_name = 'Объек застройки'
+        verbose_name_plural = 'Объекты застройки'
 
 
 class ProdKv(models.Model):
-    id_prod = models.AutoField(primary_key=True)
-    id_dog = models.ForeignKey(DogovorProd, models.DO_NOTHING, db_column='id_dog')
-    id_kv = models.ForeignKey(Kvart, models.DO_NOTHING, db_column='id_kv')
-    stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
+    id_prod = models.AutoField(primary_key=True, verbose_name= "ИД продажи")
+    id_dog = models.ForeignKey(DogovorProd, models.CASCADE, db_column='id_dog', verbose_name= "ИД договора")
+    id_kv = models.ForeignKey(Kvart, models.CASCADE, db_column='id_kv', verbose_name= "ИД квартиры")
+    stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name= "Стоимость")
 
     class Meta:
         managed = False
         db_table = 'prod_kv'
-
+        verbose_name = 'Проданная квартира'
+        verbose_name_plural = 'Проданные квартиры'
 
 class Sotrudn(models.Model):
-    kod_sotrudn = models.IntegerField(primary_key=True)
-    fio = models.CharField(max_length=90)
-    dolz = models.CharField(max_length=70)
+    kod_sotrudn = models.IntegerField(primary_key=True, verbose_name= "Код сотрудника")
+    fio = models.CharField(max_length=90, verbose_name= "ФИО")
+    dolz = models.CharField(max_length=70, verbose_name= "Должность")
 
     class Meta:
         managed = False
         db_table = 'sotrudn'
-
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
 
 class VidJil(models.Model):
-    kod_vida = models.IntegerField(primary_key=True)
-    naim_jil = models.CharField(max_length=50)
+    kod_vida = models.IntegerField(primary_key=True, verbose_name= "Код вида")
+    naim_jil = models.CharField(max_length=50, verbose_name= "Наименование жилья")
 
     class Meta:
         managed = False
         db_table = 'vid_jil'
-
+        verbose_name = 'Вид жилья'
+        verbose_name_plural = 'Виды жилья'
 
 class Zayavka(models.Model):
-    id_zaya = models.AutoField(primary_key=True)
-    data_zaya = models.DateField()
-    opisanie = models.CharField(max_length=20)
-    kod_client = models.ForeignKey(Client, models.DO_NOTHING, db_column='kod_client')
-    kod_sotrudn = models.ForeignKey(Sotrudn, models.DO_NOTHING, db_column='kod_sotrudn')
+    id_zaya = models.AutoField(primary_key=True, verbose_name= "ИД заявки")
+    data_zaya = models.DateField(verbose_name= "Дата заполнения")
+    opisanie = models.CharField(max_length=20, verbose_name= "Описание")
+    kod_client = models.ForeignKey(Client, models.CASCADE, db_column='kod_client', verbose_name= "Код клиента")
+    kod_sotrudn = models.ForeignKey(Sotrudn, models.CASCADE, db_column='kod_sotrudn', verbose_name= "Код сотрудника")
 
     class Meta:
         managed = False
         db_table = 'zayavka'
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки'
