@@ -83,6 +83,7 @@ def calculate_sum_dogs(sender, instance: KnOplat, **kwargs):
 post_save.connect(calculate_sum_dogs, sender=KnOplat)
 post_delete.connect(calculate_sum_dogs, sender=KnOplat)
 
+
 class Kvart(models.Model):
     id_kv = models.AutoField(primary_key=True, verbose_name="ИД квартиры")
     num_etag = models.IntegerField(verbose_name="Номер этажа")
