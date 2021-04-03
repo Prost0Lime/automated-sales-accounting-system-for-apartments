@@ -1,10 +1,157 @@
-{% extends 'core/base.html' %}
-
-{% block title %}
-новая заявка
-{% endblock %}
-
-{% block body %}
-<h1>новая заявка</h1>
-<p>новая заявка</p>
-{% endblock %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>	
+		   {% load bootstrap4 %}
+    {% bootstrap_css %}
+	</head>
+	<body>
+		<br>
+		<div id="column1">
+			<img src="3.png" class="picture">
+			<a href="{% url 'home' %}" class="back">На главную</a>
+		</div>
+		<div id="column2">
+		<form>
+			<table>
+			<tr>
+				<td colspan=2 class="th">Новая запись</td>
+			</tr>
+			<tr>
+				<td colspan=2> <img src="2.jpg" class="picture" width=702 height=405></td>
+			</tr>
+				<tr>
+					<td colspan=2 class="tc">Персональные данные:</td>
+				</tr>
+			<tr>
+				<td class="tr">ФИО:*</td>
+				<td><input type="text" name="fio" id="fio" class="in1"></td>				
+			</tr>
+			<td class="tr">Дата рождения:*</td>
+					<td><input type="date" name="calendar" id="calendar" min="1900-01-01" max="2003-12-31"></td>
+			</tr>
+			<tr>
+				<td class="tr">Пол:</td>
+				<td><input type="radio" name="type" value="Мужской">Мужской</td>
+			</tr>
+			<tr>
+				<td>
+				<td><input type="radio" name="type" value="Женский">Женский</td>
+			</tr>			
+			</tr>
+			<tr>
+				<td class="tr">Телефон:</td>
+				<td><input type="text" name="tel" class="in1"></td>				
+			</tr>
+				<tr>
+					<td colspan=2 class="tc">Паспортные данные:</td>
+				</tr>
+			<tr>
+				<td class="tr">Серия:*</td>
+				<td><input type="text" name="seria" id="seria" pattern="^[0-9]{4}" class="in1" autocomplete="off"></td>				
+			</tr>
+			<tr>
+				<td class="tr">Номер:*</td>
+				<td><input type="text" name="nomer" id="nomer" pattern="^[0-9]{6}" class="in1" autocomplete="off"></td>				
+			</tr>
+			<tr>
+			<td class="tr">Дата выдачи:*</td>
+					<td><input type="date" name="calendarvid" id="calendarvid" min="1980-01-01" max="2015-12-31"></td>
+			</tr>
+			<tr>
+				<td class="tr">Код подразделения:*</td>
+				<td><input type="text" name="kod" id="kod" pattern="^[0-9]{3}" class="in1" autocomplete="off" class="in1"></td>				
+			</tr>
+			<tr>
+				<td class="tr">Кем выдан:*</td>
+			<td><input type="text" name="vidan" id="vidan" class="in1"></td>
+			</tr>
+				<tr>
+					<td colspan=2 class="tc">Описание транспортного средства:</td>
+				</tr> 
+			<tr>
+				<td class="tr">Номер VIN:*</td>
+				<td><input type="text" name="vin" id="vin" class="in1"></td>
+			</tr>
+			<tr>
+				<td class="tr">Номер шасси (рамы):*</td>
+				<td><input type="text" name="ram" id="ram" class="in1"></td>
+			</tr>
+			<tr>
+				<td class="tr">Номер кузова:*</td>
+				<td><input type="text" name="kuz" id="kuz" class="in1"></td>
+			</tr>
+				<tr>
+					<td colspan=2  class="tc">Данные транспортного средства:</td>
+				</tr> 
+			<tr>
+			<td class="tr">Марка:*</td>
+				<td><input type="text" name="marka" id="marka" class="in1"></td>
+			</tr>
+			<tr>
+				<td class="tr">Модель:*</td>
+				<td><input type="text" name="model" id="model" class="in1"></td>
+			</tr>
+			<tr>
+				<td class="tr">Год выпуска:*</td>
+			<td><input  type="text" name="year" id="year"  pattern="^[0-9]{4}" class="in1" autocomplete="off" class="in1" class="in1" ></td>
+			</tr>
+				<tr> 
+					<td class="tr">Тип ТС:</td>
+					<td><select>
+							<option>Легковой</option>
+							<option>Грузовой</option>
+							<option>Грузопассажирский</option>
+							<option>Автобус</option>
+						</select>
+					</td>
+				</tr>
+					<tr> 
+					<td class="tr">Тип двигателя:</td>
+					<td><select>
+							<option>Дизельный</option>
+							<option>Бензиновный</option>
+							<option>Электро</option>
+						</select>
+					</td>
+				</tr>
+			<tr>
+				<td class="tr">Изготовитель:*</td>
+				<td><input type="text" name="proizv" id="proizv" class="in1"></td>
+			</tr>
+					<tr>
+						<td class="tr">Расположение руля:</td>
+						<td><input type="checkbox" name="privelege" value="ticket">Руль справа</td>
+					</tr>
+				<tr>
+					<td class="tr">Цвет:</td>
+					<td><select>
+							<option>Красный</option>
+							<option>Синий</option>
+							<option>Зелёный</option>
+							<option>Чёрный</option>
+							<option>Жёлтый</option>
+							<option>Серый</option>
+							<option>Другой</option>
+						</select>
+				</tr>
+				<tr>
+					<td colspan=2 class="tcc">Для отправки нажмите "Отправить"</td>
+				</tr>
+				<tr>
+					<td colspan=2 class="tcc">Для очистки нажмите "Очистка"</td>
+				</tr>
+				<tr>
+					<td colspan=2 align=center>
+						<input type="submit" name="order" id="order" value="Отправить">
+						<input type="reset" name="clear" id="clear" value="Очистка">
+					</td>
+				</tr>		
+			</table>
+		</form>
+		</div>
+		<div id="column3"></div>
+			<script src="part1script.js">
+			</script>
+	</body>
+</html>
