@@ -27,7 +27,7 @@ CREATE TABLE Client (
        Kod_client           INTEGER NOT NULL
                                    CHECK (Kod_client>0),
        Pasp                 VARCHAR(40) NOT NULL,
-       FIO_sotr                  VARCHAR(70) NOT NULL,
+       FIO_client                  VARCHAR(70) NOT NULL,
        Phone                VARCHAR(50) NOT NULL,
        Status               VARCHAR(20) NOT NULL,
        PRIMARY KEY (Kod_client)

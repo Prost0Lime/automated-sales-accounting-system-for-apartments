@@ -7,9 +7,9 @@ from core.models import Client, DogovorProd, KategKvart, KnOplat, Kvart, ObjZast
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ["kod_client", "pasp", "fio_sotr", "phone", "status"]
+    list_display = ["kod_client", "pasp", "fio_client", "phone", "status"]
     list_filter = ["status"]
-    search_fields = ["pasp", "fio_sotr", "phone"]
+    search_fields = ["pasp", "fio_client", "phone"]
     ordering = ["kod_client"]
 
 class KnOplatInline(admin.TabularInline):

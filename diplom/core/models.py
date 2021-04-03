@@ -13,7 +13,7 @@ from django.dispatch import receiver
 class Client(models.Model):
     kod_client = models.IntegerField(primary_key=True, verbose_name="Код клиента")
     pasp = models.CharField(max_length=40, verbose_name="Паспорт")
-    fio_sotr = models.CharField(max_length=70, verbose_name="ФИО")
+    fio_client = models.CharField(max_length=70, verbose_name="ФИО")
     phone = models.CharField(max_length=50, verbose_name="Телефон")
     status = models.CharField(max_length=20, verbose_name="Статус")
 

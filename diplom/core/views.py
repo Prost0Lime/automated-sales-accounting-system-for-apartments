@@ -7,3 +7,7 @@ def main(request):
 
 def about(request):
     return render(request, 'core/about.html')
+
+
+def new_application(request):
+    return render(request, 'core/new_appl.html')
