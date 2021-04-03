@@ -12,6 +12,7 @@ class ClientAdmin(admin.ModelAdmin):
     search_fields = ["pasp", "fio_client", "phone"]
     ordering = ["kod_client"]
 
+
 class KnOplatInline(admin.TabularInline):
     model = KnOplat
     extra = 0

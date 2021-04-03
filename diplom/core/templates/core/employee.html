@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Панель сотрудника
+{% endblock %}
+
+{% block body %}
+<h4>Панель сотрудника</h4>
+{% if zayavki.count > 0 %}
+<h3 class="text-center">Cписок заявок</h3>
+<table align=center border>
+    <tr>
+        <th>ИД заявки</th>
+        <th>Дата</th>
+        <th>Описание</th>
+        <th>Код клиента</th>
+        <th>Код сотрудника</th>
+
+    </tr>
+    {% for zayavka in zayavki %}
+    <tr>
+        <td>{{ zayavka.id_zaya }}</td>
+        <td>{{ zayavka.data_zaya }}</td>
+        <td>{{ zayavka.opisanie }}</td>
+        <td>{{ zayavka.kod_client }}</td>
+        <td>{{ zayavka.kod_sotrudn }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+{% endblock %}

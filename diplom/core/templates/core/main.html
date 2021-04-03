@@ -6,5 +6,8 @@
 
 {% block body %}
 <h1>Главная</h1>
-<p>Просто текст</p>
-{% endblock %}
+<form align=center>
+    <a class="p-2 text-dark" href="{% url 'new_appl' %}">новая запись</a>
+    <br>
+    <a class="p-2 text-dark" href="{% url 'employee' %}">панель сотрудника</a>
+</form>{% endblock %}

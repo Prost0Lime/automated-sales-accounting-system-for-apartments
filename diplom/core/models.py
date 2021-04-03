@@ -53,6 +53,7 @@ class KategKvart(models.Model):
     kod_kategorii = models.IntegerField(primary_key=True, verbose_name="Код категории")
     naim_kat = models.CharField(max_length=50, verbose_name="Наименование")
 
+
     class Meta:
         managed = False
         db_table = 'kateg_kvart'
