@@ -1,41 +1,47 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from .models import Zayavka
+from django.shortcuts import render, redirect
+from .models import *
 from .forms import ZayavkaForm
 
-def main(request):
-    return render(request, 'core/main.html')
+
+# def main(request):
+#     return render(request, 'core/main.html')
 
 
 def about(request):
     return render(request, 'core/about.html')
 
 
-def new_appl(request):
-    return render(request, 'core/new_appl.html')
-
-
 def login(request):
     return render(request, 'core/login.html')
-
-
-# def employee(request):
-#     return render(request, 'core/employee.html')
 
 
 # получение данных из бд
 def index(request):
     zayavki = Zayavka.objects.all()
-    return render(request, 'core/employee.html', {"zayavki": zayavki})
+    return render(request, 'core/employee.html', {'zayavki': zayavki})
 
 
 # сохранение данных в бд
 def create(request):
+    error = ''
+    if request.method == 'POST':
+        form = ZayavkaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            error = 'Форма заполнена не правильно'
+
     form = ZayavkaForm()
 
     data = {
-        'form': form
+        'form': form,
+        'error': error
     }
-    return render(request, 'core/new_application.html', data)
+    return render(request, 'core/new_appl.html', data)
 
+# вывод квартир на главный экран
+def list_main(request):
+    menu = Kvart.objects.all()
+    return render(request, 'core/main.html', {'menu': menu})
 

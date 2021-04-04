@@ -18,7 +18,7 @@ class Client(models.Model):
     status = models.CharField(max_length=20, verbose_name="Статус")
 
     def __str__(self):
-        return "<Client {kod_client}>".format(kod_client=self.kod_client)
+        return "{kod_client}".format(kod_client=self.kod_client)
 
     class Meta:
         managed = False
@@ -42,6 +42,9 @@ class DogovorProd(models.Model):
                                     db_column='kod_sotrudn', verbose_name="Код сотрудника",
                                     related_name='dogovors')
 
+    def __str__(self):
+        return "{id_dog}".format(id_dog=self.id_dog)
+
     class Meta:
         managed = False
         db_table = 'dogovor_prod'
@@ -53,6 +56,8 @@ class KategKvart(models.Model):
     kod_kategorii = models.IntegerField(primary_key=True, verbose_name="Код категории")
     naim_kat = models.CharField(max_length=50, verbose_name="Наименование")
 
+    def __str__(self):
+        return "{kod_kategorii}".format(kod_kategorii=self.kod_kategorii)
 
     class Meta:
         managed = False
@@ -68,6 +73,9 @@ class KnOplat(models.Model):
     id_dog = models.ForeignKey(DogovorProd, models.CASCADE, db_column='id_dog', verbose_name="ИД договора",
                                related_name='oplaty')
 
+    def __str__(self):
+        return "{id_oplt}".format(id_oplt=self.id_oplt)
+
     class Meta:
         managed = False
         db_table = 'kn_oplat'
@@ -75,6 +83,7 @@ class KnOplat(models.Model):
         verbose_name_plural = 'Книга оплат'
 
 
+# Вычисляемые поля
 def calculate_sum_dogs(sender, instance: KnOplat, **kwargs):
     dog = instance.id_dog
     dog.opl = sum(instance.id_dog.oplaty.values_list('sum_opl', flat=True))
@@ -96,6 +105,9 @@ class Kvart(models.Model):
     kod_kategorii = models.ForeignKey(KategKvart, models.CASCADE, db_column='kod_kategorii',
                                       verbose_name="Код категории")
 
+    def __str__(self):
+        return "{id_kv}".format(id_kv=self.id_kv)
+
     class Meta:
         managed = False
         db_table = 'kvart'
@@ -110,6 +122,9 @@ class ObjZastroi(models.Model):
     kol_vo_et = models.IntegerField(verbose_name="Кол-во этажей")
     kod_vida = models.ForeignKey('VidJil', models.CASCADE, db_column='kod_vida', verbose_name="Код вида")
 
+    def __str__(self):
+        return "{num_obj}".format(num_obj=self.num_obj)
+
     class Meta:
         managed = False
         db_table = 'obj_zastroi'
@@ -123,6 +138,9 @@ class ProdKv(models.Model):
     id_kv = models.ForeignKey(Kvart, models.CASCADE, db_column='id_kv', verbose_name="ИД квартиры")
     stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name="Стоимость")
 
+    def __str__(self):
+        return "{id_prod}".format(id_prod=self.id_prod)
+
     class Meta:
         managed = False
         db_table = 'prod_kv'
@@ -135,6 +153,9 @@ class Sotrudn(models.Model):
     fio = models.CharField(max_length=90, verbose_name="ФИО")
     dolz = models.CharField(max_length=70, verbose_name="Должность")
 
+    def __str__(self):
+        return "{kod_sotrudn}".format(kod_sotrudn=self.kod_sotrudn)
+
     class Meta:
         managed = False
         db_table = 'sotrudn'
@@ -145,6 +166,9 @@ class Sotrudn(models.Model):
 class VidJil(models.Model):
     kod_vida = models.IntegerField(primary_key=True, verbose_name="Код вида")
     naim_jil = models.CharField(max_length=50, verbose_name="Наименование жилья")
+
+    def __str__(self):
+        return "{kod_vida}".format(kod_vida=self.kod_vida)
 
     class Meta:
         managed = False
@@ -159,6 +183,9 @@ class Zayavka(models.Model):
     opisanie = models.CharField(max_length=20, verbose_name="Описание")
     kod_client = models.ForeignKey(Client, models.CASCADE, db_column='kod_client', verbose_name="Код клиента")
     kod_sotrudn = models.ForeignKey(Sotrudn, models.CASCADE, db_column='kod_sotrudn', verbose_name="Код сотрудника")
+
+    def __str__(self):
+        return "{id_zaya}".format(id_zaya=self.id_zaya)
 
     class Meta:
         managed = False

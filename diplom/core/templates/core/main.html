@@ -5,9 +5,28 @@
 {% endblock %}
 
 {% block body %}
-<h1>Главная</h1>
-<form align=center>
-    <a class="p-2 text-dark" href="{% url 'new_appl' %}">новая запись</a>
-    <br>
-    <a class="p-2 text-dark" href="{% url 'employee' %}">панель сотрудника</a>
-</form>{% endblock %}
+
+    <h1>Главная</h1>
+    <form align=center>
+        <a class="p-2 text-dark" href="{% url 'new_appl' %}">новая запись</a>
+        <br>
+        <a class="p-2 text-dark" href="{% url 'employee' %}">панель сотрудника</a>
+        <br>
+        {% if menu %}
+        {% for el in menu %}
+        <div class="row">
+            <div class="col alert alert-dark">
+                <p>Номер этажа {{ el.num_etag }}</p>
+                <p>Количество комнат {{ el.kol_vo_kom }}</p>
+                <p> Стоимость {{ el.stoim }}</p>
+                <p> Код категории {{ kod_kategorii }}</p>
+
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Все квартиры распроданы</p>
+        {% endif %}
+    </form>
+
+    {% endblock %}

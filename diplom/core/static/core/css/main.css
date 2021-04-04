@@ -1,0 +1,11 @@
+body {
+    background: #DEB887;
+}
+.alert-dark {
+    float: left;
+    clear: both;
+    width: 30%;
+    margin: 25px 20%;
+    text-align: center;
+
+}
