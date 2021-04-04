@@ -5,24 +5,19 @@
 {% endblock %}
 
 {% block body %}
-<form align=center method="POST" action="new_application">
+<form align=center method="post" >
     {% csrf_token %}
-    <p>
-        <label>Введите дату</label><br>
-        <input type="date" name="data_zaya"/>
-    </p>
-    <p>
-        <label>Введите описание</label><br>
-        <input type="text" name="opisanie"/>
-    </p>
-    <p>
-        <label>Введите код клиента</label><br>
-        <input type="text" name="kod_client"/>
-    </p>
-    <p>
-        <label>Введите код сотрудника</label><br>
-        <input type="text" name="kod_sotrudn"/>
-    </p>
-    <input type="submit" value="Сохранить">
+    {{ from }}
+
+    <label>Введите дату</label><br>
+    <input type="date" name="data_zaya"> <br>
+    <label>Введите описание</label><br>
+    <input type="text" placeholder="Описание" name="opisanie"/> <br>
+    <label>Введите код клиента</label><br>
+    <input type="text" placeholder="Клиент клента"name="kod_client"/> <br>
+    <label>Введите код сотрудника</label><br>
+    <p><input type="text" placeholder="Код сотрудника" name="kod_sotrudn"/></p>
+
+    <button class="btn btn-success" type="submit">Сохранить</button>
 </form>
 {%endblock%}

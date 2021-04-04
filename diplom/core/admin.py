@@ -78,6 +78,6 @@ class VidJilAdmin(admin.ModelAdmin):
 
 @admin.register(Zayavka)
 class ZayavkaAdmin(admin.ModelAdmin):
-    list_display = ["id_zaya", "data_zaya", "opisanie", "kod_client", "fio", "kod_sotrudn"]
+    list_display = ["id_zaya", "data_zaya", "opisanie", "kod_client", "kod_sotrudn"]
     search_fields = ["data_zaya"]
     ordering = ["id_zaya"]
