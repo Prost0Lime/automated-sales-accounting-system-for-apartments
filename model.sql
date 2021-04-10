@@ -13,6 +13,62 @@ CREATE TABLE Kateg_kvart (
        PRIMARY KEY (Kod_kategorii)
 );
 
+CREATE TABLE Obj_zastroi (
+       Num_obj              INTEGER NOT NULL
+                                   CHECK (Num_obj>=0),
+       Street               VARCHAR(70) NOT NULL,
+       Num_zd               VARCHAR(20) NOT NULL,
+       Kol_vo_et            INTEGER NOT NULL DEFAULT 1
+                                   CHECK (Kol_vo_et>0),
+       Kod_vida             INTEGER NOT NULL
+                                   CHECK (Kod_vida>0),
+       PRIMARY KEY (Num_obj),
+       FOREIGN KEY (Kod_vida)
+                             REFERENCES Vid_jil  (Kod_vida)
+                             ON DELETE RESTRICT
+                             ON UPDATE RESTRICT
+);
+
+CREATE INDEX XIF1Obj_zastroi ON Obj_zastroi
+(
+       Kod_vida ASC
+);
+
+CREATE TABLE Kvart (
+       Id_kv                SERIAL NOT NULL,
+       Num_etag             INTEGER NOT NULL
+                                   CHECK (Num_etag>0),
+       Num_kv               VARCHAR(50) NOT NULL,
+       Kol_vo_kom           INTEGER DEFAULT 1
+                                   CHECK (Kol_vo_kom>0),
+       Area                 NUMERIC(6,2) DEFAULT 0
+                                   CHECK (Area>0),
+       Stoim                NUMERIC(9,2) DEFAULT 0
+                                   CHECK (Stoim>=0),
+       Num_obj              INTEGER NOT NULL
+                                   CHECK (Num_obj>=0),
+       Kod_kategorii        INTEGER NOT NULL
+                                   CHECK (Kod_kategorii>0),
+       PRIMARY KEY (Id_kv),
+       FOREIGN KEY (Kod_kategorii)
+                             REFERENCES Kateg_kvart  (Kod_kategorii)
+                             ON DELETE RESTRICT
+                             ON UPDATE RESTRICT,
+       FOREIGN KEY (Num_obj)
+                             REFERENCES Obj_zastroi  (Num_obj)
+                             ON DELETE RESTRICT
+                             ON UPDATE RESTRICT
+);
+
+CREATE INDEX XIF7Kvart ON Kvart
+(
+       Num_obj ASC
+);
+
+CREATE INDEX XIF8Kvart ON Kvart
+(
+       Kod_kategorii ASC
+);
 
 CREATE TABLE Sotrudn (
        Kod_sotrudn          INTEGER NOT NULL
@@ -35,22 +91,27 @@ CREATE TABLE Client (
 
 
 CREATE TABLE Zayavka (
-       ID_zaya              SERIAL NOT NULL,
+       Id_zaya              SERIAL NOT NULL,
        Data_zaya            DATE NOT NULL,
-       Opisanie             VARCHAR(20) NOT NULL,
+       Id_kv                INTEGER NOT NULL,
        Kod_client           INTEGER NOT NULL
                                    CHECK (Kod_client>0),
        Kod_sotrudn          INTEGER NOT NULL
                                    CHECK (Kod_sotrudn>0),
-       PRIMARY KEY (ID_zaya), 
+       PRIMARY KEY (Id_zaya),
+       FOREIGN KEY (id_kv)
+                             REFERENCES Kvart  (id_kv)
+                             ON DELETE RESTRICT
+                             ON UPDATE RESTRICT,
        FOREIGN KEY (Kod_sotrudn)
                              REFERENCES Sotrudn  (Kod_sotrudn)
                              ON DELETE RESTRICT
-                             ON UPDATE RESTRICT, 
+                             ON UPDATE RESTRICT,
        FOREIGN KEY (Kod_client)
                              REFERENCES Client  (Kod_client)
                              ON DELETE RESTRICT
                              ON UPDATE RESTRICT
+
 );
 
 CREATE INDEX XIF1Zayavka ON Zayavka
@@ -63,6 +124,10 @@ CREATE INDEX XIF2Zayavka ON Zayavka
        Kod_sotrudn ASC
 );
 
+CREATE INDEX XIF3Zayavka ON Zayavka
+(
+       id_kv ASC
+);
 
 CREATE TABLE Dogovor_prod (
        Id_dog               SERIAL NOT NULL,
@@ -74,7 +139,7 @@ CREATE TABLE Dogovor_prod (
                                    CHECK (Sum_dog>=0),
        Opl                  NUMERIC(9,2) DEFAULT 0
                                    CHECK (Opl>=0),
-       ID_zaya              INTEGER NOT NULL,
+       Id_zaya              INTEGER NOT NULL,
        Kod_sotrudn          INTEGER NOT NULL
                                    CHECK (Kod_sotrudn>0),
        PRIMARY KEY (Id_dog), 
@@ -90,7 +155,7 @@ CREATE TABLE Dogovor_prod (
 
 CREATE INDEX XIF11Dogovor_prod ON Dogovor_prod
 (
-       ID_zaya ASC
+       Id_zaya ASC
 );
 
 CREATE INDEX XIF12Dogovor_prod ON Dogovor_prod
@@ -99,70 +164,13 @@ CREATE INDEX XIF12Dogovor_prod ON Dogovor_prod
 );
 
 
-CREATE TABLE Obj_zastroi (
-       Num_obj              INTEGER NOT NULL
-                                   CHECK (Num_obj>=0),
-       Street               VARCHAR(70) NOT NULL,
-       Num_zd               VARCHAR(20) NOT NULL,
-       Kol_vo_et            INTEGER NOT NULL DEFAULT 1
-                                   CHECK (Kol_vo_et>0),
-       Kod_vida             INTEGER NOT NULL
-                                   CHECK (Kod_vida>0),
-       PRIMARY KEY (Num_obj), 
-       FOREIGN KEY (Kod_vida)
-                             REFERENCES Vid_jil  (Kod_vida)
-                             ON DELETE RESTRICT
-                             ON UPDATE RESTRICT
-);
-
-CREATE INDEX XIF1Obj_zastroi ON Obj_zastroi
-(
-       Kod_vida ASC
-);
-
-
-CREATE TABLE Kvart (
-       Id_kv                SERIAL NOT NULL,
-       Num_etag             INTEGER NOT NULL
-                                   CHECK (Num_etag>0),
-       Num_kv               VARCHAR(50) NOT NULL,
-       Kol_vo_kom           INTEGER DEFAULT 1
-                                   CHECK (Kol_vo_kom>0),
-       Area                 NUMERIC(6,2) DEFAULT 0
-                                   CHECK (Area>0),
-       Stoim                NUMERIC(9,2) DEFAULT 0
-                                   CHECK (Stoim>=0),
-       Num_obj              INTEGER NOT NULL
-                                   CHECK (Num_obj>=0),
-       Kod_kategorii        INTEGER NOT NULL
-                                   CHECK (Kod_kategorii>0),
-       PRIMARY KEY (Id_kv), 
-       FOREIGN KEY (Kod_kategorii)
-                             REFERENCES Kateg_kvart  (Kod_kategorii)
-                             ON DELETE RESTRICT
-                             ON UPDATE RESTRICT, 
-       FOREIGN KEY (Num_obj)
-                             REFERENCES Obj_zastroi  (Num_obj)
-                             ON DELETE RESTRICT
-                             ON UPDATE RESTRICT
-);
-
-CREATE INDEX XIF7Kvart ON Kvart
-(
-       Num_obj ASC
-);
-
-CREATE INDEX XIF8Kvart ON Kvart
-(
-       Kod_kategorii ASC
-);
 
 
 CREATE TABLE Prod_kv (
        Id_prod              SERIAL NOT NULL,
        Id_dog               INTEGER NOT NULL,
        Id_kv                INTEGER NOT NULL,
-       Stoim                NUMERIC(6,2) DEFAULT 0
+       Stoim                NUMERIC(9,2) DEFAULT 0
                                    CHECK (Stoim>=0),
        PRIMARY KEY (Id_prod), 
        FOREIGN KEY (Id_dog)

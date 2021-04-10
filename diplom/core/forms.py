@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, DateInput, Select
 class ZayavkaForm(ModelForm):
     class Meta:
         model = Zayavka
-        fields = ['data_zaya', 'opisanie', 'kod_client', 'kod_sotrudn']
+        fields = ['data_zaya', 'id_kv', 'kod_client', 'kod_sotrudn']
 
         widgets = {
             "data_zaya": DateInput(attrs={
@@ -13,9 +13,9 @@ class ZayavkaForm(ModelForm):
                 'type': 'date',
                 'placeholder': 'Дата заявки'
             }),
-            "opisanie": TextInput(attrs={
+            "id_kv": Select(attrs={
                 'class': 'form-control',
-                'placeholder': 'Описание'
+                'placeholder': 'Ид квартиры'
             }),
 
             "kod_client": Select(attrs={
