@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Квартира
+{% endblock %}
+
+{% block body %}
+
+<form>
+    <div align=center>
+        <a class="p-2 text-dark" href="{% url 'new_appl' %}">новая запись</a>
+        <br>
+        <a class="p-2 text-dark" href="{% url 'employee' %}">панель сотрудника</a>
+        <br><br>
+    </div>
+
+    <h1>{{ kvart.kod_kategorii }}</h1>
+    <p>{{ kvart.num_etag }}</p>
+    <p>{{ kvart.num_kv }}</p>
+    <p>{{ kvart.kol_vo_kom }}</p>
+    <p>{{ kvart.area }}</p>
+    <p>{{ kvart.stoim }}</p>
+    <p>{{ kvart.num_obj }}</p>
+    <p>{{ kvart.kod_kategorii }}</p>
+    <p>{{ kvart.image }}</p>
+</form>
+
+{% endblock %}

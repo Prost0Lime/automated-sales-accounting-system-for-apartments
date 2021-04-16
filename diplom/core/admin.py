@@ -43,7 +43,8 @@ class KnOplatAdmin(admin.ModelAdmin):
 
 @admin.register(Kvart)
 class KvartAdmin(admin.ModelAdmin):
-    list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "num_obj", "kod_kategorii"]
+    list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "num_obj", "kod_kategorii", "image"]
+
     list_filter = ["num_etag", "kol_vo_kom"]
     ordering = ["id_kv"]
 

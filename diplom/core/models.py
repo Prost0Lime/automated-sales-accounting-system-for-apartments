@@ -104,9 +104,11 @@ class Kvart(models.Model):
     num_obj = models.ForeignKey('ObjZastroi', models.CASCADE, db_column='num_obj', verbose_name="Номер объекта")
     kod_kategorii = models.ForeignKey(KategKvart, models.CASCADE, db_column='kod_kategorii',
                                       verbose_name="Код категории")
+    image = models.BinaryField(blank=True, null=True)
 
     def __str__(self):
         return "{id_kv}".format(id_kv=self.id_kv)
+
 
     class Meta:
         managed = False

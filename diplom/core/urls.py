@@ -7,5 +7,5 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('emlpoyee', views.index, name='employee'),
     path('new_appl', views.create, name='new_appl'),
-
+    path('<int:pk>', views.KvartDelailView.as_view(), name='kvartdeteil')
 ]

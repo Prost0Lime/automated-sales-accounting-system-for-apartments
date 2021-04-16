@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import ZayavkaForm
+from django.views.generic import DetailView
 
 
 # def main(request):
@@ -40,8 +41,14 @@ def create(request):
     }
     return render(request, 'core/new_appl.html', data)
 
+
 # вывод квартир на главный экран
 def list_main(request):
     menu = Kvart.objects.all()
     return render(request, 'core/main.html', {'menu': menu})
 
+
+class KvartDelailView(DetailView):
+    model = Kvart
+    template_name = 'core/kvartdetail.html'
+    context_object_name = 'kvart'
