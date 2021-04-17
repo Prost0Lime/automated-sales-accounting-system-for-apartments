@@ -14,17 +14,22 @@
     <a class="text-dark" href="{% url 'employee' %}">панель сотрудника</a>
     <br><br>
 
+    <h2 class="display-6 ">Список квартир</h2>
+
+        <br><br>
     <div align=center class="container">
         <div class="row">
             {% if menu %}
             {% for el in menu %}
 
             <div class="col">
-
                 <div class="card" style="width: 20rem;">
-                    <img class="card-img-top"
-                         src=""
-                         alt="Card image cap">
+                    <div class="card-img-top">
+                        {% if el.image %}
+                        <img src="{{ MEDIA_URL }}{{ el.image.url}}" class=" img-thumbnail">
+                        {% endif %}
+                    </div>
+
                     <div class="card-body">
                         <p>Номер этажа: {{ el.num_etag }}</p>
                         <p>Количество комнат: {{ el.kol_vo_kom }}</p>

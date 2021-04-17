@@ -2,6 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 # Register the Admin classes for Book using the decorator
+
 from core.models import Client, DogovorProd, KategKvart, KnOplat, Kvart, ObjZastroi, ProdKv, Sotrudn, VidJil, Zayavka
 
 
@@ -43,8 +44,9 @@ class KnOplatAdmin(admin.ModelAdmin):
 
 @admin.register(Kvart)
 class KvartAdmin(admin.ModelAdmin):
-    list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "num_obj", "kod_kategorii", "image"]
-
+    list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "num_obj", "kod_kategorii",
+                    "image_img"]
+    readonly_fields = ('image_img',)
     list_filter = ["num_etag", "kol_vo_kom"]
     ordering = ["id_kv"]
 

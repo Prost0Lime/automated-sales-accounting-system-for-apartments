@@ -7,7 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.db.models.signals import post_delete, post_save
-from django.dispatch import receiver
+from django.utils.safestring import mark_safe
 
 
 class Client(models.Model):
@@ -101,14 +101,23 @@ class Kvart(models.Model):
     kol_vo_kom = models.IntegerField(blank=True, null=True, verbose_name="Кол-во комнат")
     area = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name="Площадь")
     stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name="Стоимость")
+    image = models.ImageField(blank=True, null=True, upload_to="images/", verbose_name='Изображение')
     num_obj = models.ForeignKey('ObjZastroi', models.CASCADE, db_column='num_obj', verbose_name="Номер объекта")
     kod_kategorii = models.ForeignKey(KategKvart, models.CASCADE, db_column='kod_kategorii',
                                       verbose_name="Код категории")
-    image = models.BinaryField(blank=True, null=True)
+
+    # Вывод в админ панель изображения
+    def image_img(self):
+        if self.image:
+            return mark_safe(u'<a href="{0}" target="_blank"><img src="{0}" width="100"/></a>'.format(self.image.url))
+        else:
+            return '(Нет изображения)'
+
+    image_img.short_description = 'Изображение'
+    image_img.allow_tags = True
 
     def __str__(self):
         return "{id_kv}".format(id_kv=self.id_kv)
-
 
     class Meta:
         managed = False

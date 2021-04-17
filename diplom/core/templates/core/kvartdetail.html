@@ -22,7 +22,12 @@
     <p>{{ kvart.stoim }}</p>
     <p>{{ kvart.num_obj }}</p>
     <p>{{ kvart.kod_kategorii }}</p>
-    <p>{{ kvart.image }}</p>
+    <div >
+        {% if kvart.image %}
+        <img src="{{ MEDIA_URL }}{{ kvart.image.url}}">
+        {% endif %}
+    </div>
+
 </form>
 
 {% endblock %}
