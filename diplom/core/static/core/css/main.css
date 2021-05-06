@@ -17,3 +17,7 @@ body {
 .p-3 {
   padding: $spacer !important;
 }
+
+.indent {
+    padding: 5px;
+   }

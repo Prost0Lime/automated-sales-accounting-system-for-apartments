@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from dbview.models import DbView
 from django.db.models.signals import post_delete, post_save
 from django.utils.safestring import mark_safe
 
@@ -83,15 +84,15 @@ class KnOplat(models.Model):
         verbose_name_plural = 'Книга оплат'
 
 
-# Вычисляемые поля
-def calculate_sum_dogs(sender, instance: KnOplat, **kwargs):
-    dog = instance.id_dog
-    dog.opl = sum(instance.id_dog.oplaty.values_list('sum_opl', flat=True))
-    dog.save()
-
-
-post_save.connect(calculate_sum_dogs, sender=KnOplat)
-post_delete.connect(calculate_sum_dogs, sender=KnOplat)
+# # Вычисляемые поля
+# def calculate_sum_dogs(sender, instance: KnOplat, **kwargs):
+#     dog = instance.id_dog
+#     dog.opl = sum(instance.id_dog.oplaty.values_list('sum_opl', flat=True))
+#     dog.save()
+#
+#
+# post_save.connect(calculate_sum_dogs, sender=KnOplat)
+# post_delete.connect(calculate_sum_dogs, sender=KnOplat)
 
 
 class Kvart(models.Model):
@@ -132,6 +133,10 @@ class ObjZastroi(models.Model):
     num_zd = models.CharField(max_length=20, verbose_name="Номер здания")
     kol_vo_et = models.IntegerField(verbose_name="Кол-во этажей")
     kod_vida = models.ForeignKey('VidJil', models.CASCADE, db_column='kod_vida', verbose_name="Код вида")
+    trans_dos = models.CharField(max_length=100, verbose_name="Транспортная доступность")
+    soc_infr = models.CharField(max_length=100, verbose_name="Социальная инфраструктура")
+    rekreaciya = models.CharField(max_length=100, verbose_name="Рекреация")
+    parkov = models.CharField(max_length=50, verbose_name="Парковочные места")
 
     def __str__(self):
         return "{num_obj}".format(num_obj=self.num_obj)
@@ -190,6 +195,7 @@ class VidJil(models.Model):
 
 class Zayavka(models.Model):
     id_zaya = models.AutoField(primary_key=True, verbose_name="ИД заявки")
+    num_zaya = models.IntegerField(verbose_name="Номер заявки")
     data_zaya = models.DateField(verbose_name="Дата заполнения")
     id_kv = models.ForeignKey(Kvart, models.CASCADE, db_column='id_kv', verbose_name="ИД квартиры")
     kod_client = models.ForeignKey(Client, models.CASCADE, db_column='kod_client', verbose_name="Код клиента")
@@ -203,3 +209,31 @@ class Zayavka(models.Model):
         db_table = 'zayavka'
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
+
+
+class KvartV(models.Model):
+    id_kv = models.AutoField(primary_key=True, verbose_name="ИД квартиры")
+    num_etag = models.IntegerField()
+    num_kv = models.CharField(max_length=50)
+    kol_vo_kom = models.IntegerField()
+    area = models.DecimalField(max_digits=9, decimal_places=2)
+    stoim = models.DecimalField(max_digits=9, decimal_places=2)
+    image = models.ImageField(blank=True, null=True)
+    num_obj = models.IntegerField()
+    street = models.CharField(max_length=70)
+    num_zd = models.CharField(max_length=20)
+    kol_vo_et = models.IntegerField()
+    trans_dos = models.CharField(max_length=100)
+    soc_infr = models.CharField(max_length=100)
+    rekreaciya = models.CharField(max_length=100)
+    parkov = models.CharField(max_length=50)
+    kod_kategorii = models.IntegerField()
+    naim_kat = models.CharField(max_length=50)
+    naim_jil = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "{id_kv}".format(id_kv=self.id_kv)
+
+    class Meta:
+        managed = False
+        db_table = "kvart_v"

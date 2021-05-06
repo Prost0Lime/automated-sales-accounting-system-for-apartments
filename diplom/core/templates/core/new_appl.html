@@ -5,16 +5,21 @@
 {% endblock %}
 
 {% block body %}
-<div align=center class="features">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.data_zaya }}<br>
-        {{ form.id_kv }}<br>
-        {{ form.kod_client }}<br>
-        {{ form.kod_sotrudn }}<br>
+<div class="col-4 mx-auto">
+    <h3>Новая заявка на покупку квартиры</h3>
+    <br><br>
+    <div align=center class="features">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.data_zaya }}<br>
+            {{ form.id_kv }}<br>
+            {{ form.kod_client }}<br>
+            {{ form.kod_sotrudn }}<br>
 
-        <span>{{ error }}</span>
-        <button class="btn btn-success" type="submit">Сохранить</button>
-    </form>
+            <span>{{ error }}</span>
+            <button class="btn btn-success" type="submit">Сохранить</button>
+            <a class="btn btn-danger" href="{% url 'home' %}">Отмена</a>
+        </form>
+    </div>
 </div>
 {%endblock%}

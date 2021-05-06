@@ -49,6 +49,8 @@ CREATE TABLE Kvart (
                                    CHECK (Num_obj>=0),
        Kod_kategorii        INTEGER NOT NULL
                                    CHECK (Kod_kategorii>0),
+       image                VARCHAR(50) NOT NULL,
+
        PRIMARY KEY (Id_kv),
        FOREIGN KEY (Kod_kategorii)
                              REFERENCES Kateg_kvart  (Kod_kategorii)
@@ -142,6 +144,7 @@ CREATE TABLE Dogovor_prod (
        Id_zaya              INTEGER NOT NULL,
        Kod_sotrudn          INTEGER NOT NULL
                                    CHECK (Kod_sotrudn>0),
+
        PRIMARY KEY (Id_dog), 
        FOREIGN KEY (Kod_sotrudn)
                              REFERENCES Sotrudn  (Kod_sotrudn)
@@ -164,29 +167,17 @@ CREATE INDEX XIF12Dogovor_prod ON Dogovor_prod
 );
 
 
-
-
 CREATE TABLE Prod_kv (
        Id_prod              SERIAL NOT NULL,
        Id_dog               INTEGER NOT NULL,
-       Id_kv                INTEGER NOT NULL,
-       Stoim                NUMERIC(9,2) DEFAULT 0
-                                   CHECK (Stoim>=0),
+
        PRIMARY KEY (Id_prod), 
        FOREIGN KEY (Id_dog)
                              REFERENCES Dogovor_prod  (Id_dog)
                              ON DELETE RESTRICT
-                             ON UPDATE RESTRICT, 
-       FOREIGN KEY (Id_kv)
-                             REFERENCES Kvart  (Id_kv)
-                             ON DELETE RESTRICT
                              ON UPDATE RESTRICT
 );
 
-CREATE INDEX XIF6Prod_kv ON Prod_kv
-(
-       Id_kv ASC
-);
 
 CREATE INDEX XIF7Prod_kv ON Prod_kv
 (

@@ -15,7 +15,6 @@
         <th>Описание</th>
         <th>Код клиента</th>
         <th>Код сотрудника</th>
-
     </tr>
     {% for zayavka in zayavki %}
     <tr>
@@ -25,6 +24,7 @@
         <td>{{ zayavka.kod_client }}</td>
         <td>{{ zayavka.kod_sotrudn }}</td>
     </tr>
+
     {% endfor %}
 </table>
 {% endif %}

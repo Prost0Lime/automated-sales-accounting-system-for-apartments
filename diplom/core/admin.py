@@ -53,14 +53,15 @@ class KvartAdmin(admin.ModelAdmin):
 
 @admin.register(ObjZastroi)
 class ObjZastroiAdmin(admin.ModelAdmin):
-    list_display = ["num_obj", "street", "num_zd", "kol_vo_et", "kod_vida"]
+    list_display = ["num_obj", "street", "num_zd", "kol_vo_et", "kod_vida", "trans_dos", "soc_infr", "rekreaciya",
+                    "parkov"]
     list_filter = ["street"]
     ordering = ["num_obj"]
 
 
 @admin.register(ProdKv)
 class ProdKvAdmin(admin.ModelAdmin):
-    list_display = ["id_prod", "id_dog", "id_kv", "stoim"]
+    list_display = ["id_prod", "id_dog"]
     ordering = ["id_prod"]
 
 
@@ -81,6 +82,13 @@ class VidJilAdmin(admin.ModelAdmin):
 
 @admin.register(Zayavka)
 class ZayavkaAdmin(admin.ModelAdmin):
-    list_display = ["id_zaya", "data_zaya", "id_kv", "kod_client", "kod_sotrudn"]
+    list_display = ["id_zaya", "num_zaya", "data_zaya", "id_kv", "kod_client", "kod_sotrudn"]
     search_fields = ["data_zaya"]
     ordering = ["id_zaya"]
+
+# @admin.register(KvartV)
+# class KvartVAdmin(admin.ModelAdmin):
+#     list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "image", "num_obj", "street",
+#                     "num_zd", "kol_vo_et", "trans_dos", "soc_infr", "rekreaciya", "parkov", "kod_kategorii", "naim_kat",
+#                     "naim_jil"]
+#     ordering = ["id_kv"]

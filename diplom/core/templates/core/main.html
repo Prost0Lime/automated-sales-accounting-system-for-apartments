@@ -7,49 +7,48 @@
 {% block body %}
 
 <h2 class="display-3 ml-1">Главная</h2>
-<form align=center>
-
-    <a class="text-danger" href="{% url 'new_appl' %}">новая запись</a>
-    <br>
-    <a class="text-dark" href="{% url 'employee' %}">панель сотрудника</a>
-    <br><br>
-
-    <h2 class="display-6 ">Список квартир</h2>
-
+<form>
+    <div align=center>
+<!--        <a class="text-danger" href="{% url 'new_appl' %}">новая запись</a>-->
+<!--        <br>-->
+        <h5 class="text-dark" href="{% url 'employee' %}">панель сотрудника</h5>
+        <br>
+        <h2 class="display-6 ">Список квартир</h2>
         <br><br>
-    <div align=center class="container">
-        <div class="row">
-            {% if menu %}
-            {% for el in menu %}
-
-            <div class="col">
-                <div class="card" style="width: 20rem;">
-                    <div class="card-img-top">
-                        {% if el.image %}
-                        <img src="{{ MEDIA_URL }}{{ el.image.url}}" class=" img-thumbnail">
-                        {% endif %}
-                    </div>
-
-                    <div class="card-body">
-                        <p>Номер этажа: {{ el.num_etag }}</p>
-                        <p>Количество комнат: {{ el.kol_vo_kom }}</p>
-                        <p> Стоимость: {{ el.stoim }}</p>
-                        <p> Код категории: {{ el.kod_kategorii }}</p>
-                        <a href="{% url 'kvartdeteil' el.id_kv %}" class="btn btn-primary">Подробнее</a>
-                    </div>
-                </div>
-                <br>
-                <br>
-            </div>
-            {% endfor %}
-
-
-        </div>
     </div>
-    {% else %}
-    <p align=center>Все квартиры распроданы</p>
-    {% endif %}
+    <div class="display">
+        <div align=center class="container">
+            <div class="row">
+                {% if menu %}
+                {% for el in menu %}
 
+                <div class="col">
+                    <div class="card indent" style="width: 20rem; height: 26rem">
+                        <div class="card-img-top">
+                            {% if el.image %}
+                            <img src="{{ MEDIA_URL }}{{ el.image.url}}" class="img-fluid" style="height: 15rem">
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body  border border-warning">
+                            <!--                        <p> Номер этажа: {{ el.num_etag }} </p>-->
+                            <p> Количество комнат: {{ el.kol_vo_kom }} </p>
+                            <p> Стоимость: {{ el.stoim }} ₽ </p>
+                            <!--                        <p> Код категории: {{ el.kod_kategorii }} </p>-->
+                            <a href="{% url 'kvartdeteil' el.id_kv %}" class="btn btn-outline-info">Подробнее</a>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        {% else %}
+        <p align=center>Все квартиры распроданы</p>
+        {% endif %}
+    </div>
 
 </form>
 

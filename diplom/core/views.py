@@ -2,10 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import ZayavkaForm
 from django.views.generic import DetailView
-
-
-# def main(request):
-#     return render(request, 'core/main.html')
+from django.views.generic import ListView
 
 
 def about(request):
@@ -16,7 +13,7 @@ def login(request):
     return render(request, 'core/login.html')
 
 
-# получение данных из бд
+# получение данных из бд заявки
 def index(request):
     zayavki = Zayavka.objects.all()
     return render(request, 'core/employee.html', {'zayavki': zayavki})
@@ -48,7 +45,8 @@ def list_main(request):
     return render(request, 'core/main.html', {'menu': menu})
 
 
+# Детали квартиры
 class KvartDelailView(DetailView):
-    model = Kvart
+    model = KvartV
     template_name = 'core/kvartdetail.html'
-    context_object_name = 'kvart'
+    context_object_name = 'kv_v'

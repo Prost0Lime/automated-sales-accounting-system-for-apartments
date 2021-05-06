@@ -7,27 +7,88 @@
 {% block body %}
 
 <form>
-    <div align=center>
-        <a class="p-2 text-dark" href="{% url 'new_appl' %}">новая запись</a>
-        <br>
-        <a class="p-2 text-dark" href="{% url 'employee' %}">панель сотрудника</a>
-        <br><br>
-    </div>
 
-    <h1>{{ kvart.kod_kategorii }}</h1>
-    <p>{{ kvart.num_etag }}</p>
-    <p>{{ kvart.num_kv }}</p>
-    <p>{{ kvart.kol_vo_kom }}</p>
-    <p>{{ kvart.area }}</p>
-    <p>{{ kvart.stoim }}</p>
-    <p>{{ kvart.num_obj }}</p>
-    <p>{{ kvart.kod_kategorii }}</p>
-    <div >
-        {% if kvart.image %}
-        <img src="{{ MEDIA_URL }}{{ kvart.image.url}}">
-        {% endif %}
-    </div>
+    <div align="center">
+        <div class="" style="width: 95%">
+            <div class="row">
+                <div class="col-5">
+                    <img src="{{ MEDIA_URL }}{{ kv_v.image.url}}" class="img-thumbnail mx-auto d-block"
+                         style="width:40rem">
+                    <br><br>
+                    <a class="btn btn-primary btn-lg" href="{% url 'new_appl' %}">Оставить заявку</a>
+                </div>
+                <div class="col-7">
 
+                    <h3 c>Объект застройки</h3>
+                    <table class="table ">
+                        <tr>
+                            <th>Улица</th>
+                            <th>{{ kv_v.street}}</th>
+                        </tr>
+                        <tr>
+                            <th>Вид жилья</th>
+                            <th>{{ kv_v.naim_jil}}</th>
+                        </tr>
+                        <tr>
+                            <th>Номер здания</th>
+                            <th>{{ kv_v.num_zd}}</th>
+                        </tr>
+                        <tr>
+                            <th>Количество этажей</th>
+                            <th>{{ kv_v.kol_vo_et}}</th>
+                        </tr>
+                        <tr>
+                            <th>Парковка</th>
+                            <th>{{ kv_v.parkov }}</th>
+                        </tr>
+                        <tr>
+                            <th>Транспортная доступность</th>
+                            <th>{{ kv_v.trans_dos}}</th>
+                        </tr>
+                        <tr>
+                            <th>Социальная инфраструктура</th>
+                            <th>{{ kv_v.soc_infr}}</th>
+                        </tr>
+                        <tr>
+                            <th>Места для отдыха</th>
+                            <th>{{ kv_v.rekreaciya}}</th>
+                        </tr>
+                    </table>
+
+                    <hr class="my-4">
+
+                    <h3>Квартира</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Категория</th>
+                            <th>{{ kv_v.naim_kat }}</th>
+                        </tr>
+                        <tr>
+                            <th>Номер этажа</th>
+                            <th>{{ kv_v.num_etag }}</th>
+                        </tr>
+                        <tr>
+                            <th>Номер квартиры</th>
+                            <th>{{ kv_v.num_kv }}</th>
+                        </tr>
+                        <tr>
+                            <th> Количество комнат</th>
+                            <th>{{ kv_v.kol_vo_kom }}</th>
+                        </tr>
+                        <tr>
+                            <th> Площадь</th>
+                            <th>{{ kv_v.area }}</th>
+                        </tr>
+                        <tr>
+                            <th> Стоимость</th>
+                            <th>{{ kv_v.stoim }}</th>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 
 {% endblock %}
