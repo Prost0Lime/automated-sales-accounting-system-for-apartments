@@ -85,10 +85,3 @@ class ZayavkaAdmin(admin.ModelAdmin):
     list_display = ["id_zaya", "num_zaya", "data_zaya", "id_kv", "kod_client", "kod_sotrudn"]
     search_fields = ["data_zaya"]
     ordering = ["id_zaya"]
-
-# @admin.register(KvartV)
-# class KvartVAdmin(admin.ModelAdmin):
-#     list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "image", "num_obj", "street",
-#                     "num_zd", "kol_vo_et", "trans_dos", "soc_infr", "rekreaciya", "parkov", "kod_kategorii", "naim_kat",
-#                     "naim_jil"]
-#     ordering = ["id_kv"]

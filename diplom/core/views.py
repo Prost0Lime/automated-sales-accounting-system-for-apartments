@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import *
-from .forms import ZayavkaForm
+from .forms import *
 from django.views.generic import DetailView
-from django.views.generic import ListView
 
 
 def about(request):
@@ -13,14 +11,14 @@ def login(request):
     return render(request, 'core/login.html')
 
 
-# получение данных из бд заявки
-def index(request):
-    zayavki = Zayavka.objects.all()
-    return render(request, 'core/employee.html', {'zayavki': zayavki})
+# получение данных из бд заявки панель сотрудника
+def employee(request):
+    zayavka = Zayavka.objects.all()
+    return render(request, 'core/employee.html', {'zayavka': zayavka})
 
 
-# сохранение данных в бд
-def create(request):
+# сохранение данных в бд Новая заявка
+def createZayavka(request):
     error = ''
     if request.method == 'POST':
         form = ZayavkaForm(request.POST)
@@ -33,10 +31,31 @@ def create(request):
     form = ZayavkaForm()
 
     data = {
-        'form': form,
+        'formZ': form,
         'error': error
     }
+
     return render(request, 'core/new_appl.html', data)
+
+
+# сохранение данных в бд Новый клиент
+def createClient(request):
+    error = ''
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('new_appl')
+        else:
+            error = 'Форма заполнена не правильно'
+
+    form = ClientForm()
+
+    data = {
+        'formC': form,
+        'error': error
+    }
+    return render(request, 'core/new_client.html', data)
 
 
 # вывод квартир на главный экран

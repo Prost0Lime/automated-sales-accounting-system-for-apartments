@@ -6,13 +6,14 @@
     {% load bootstrap4 %}
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static  'core/css/main.css' %}">
+    <link rel="stylesheet" href="{% static  'core/js/jquery.mask.js' %}">
+    <link rel="stylesheet" href="{% static  'core/js/jquery-3.3.1.min.js' %}">
 </head>
 <body>
 </div>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h4 class="my-0 mr-md-auto font-weight-normal">Компания-застройщик</h4>
+    <h4 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" href="{% url 'home' %}">Компания-застройщик</a></h4>
     <nav class="mr-md-5">
-        <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
         <a class="p-2 text-dark" href="{% url 'about' %}">О нас</a>
     </nav>
 

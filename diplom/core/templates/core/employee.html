@@ -6,7 +6,7 @@
 
 {% block body %}
 <h4>Панель сотрудника</h4>
-{% if zayavki.count > 0 %}
+{% if zayavka.count > 0 %}
 <h3 align=center>Cписок заявок</h3>
 <table align=center class=" text-center table table-bordered table-condensed table-striped table-hover">
     <tr>
@@ -16,7 +16,7 @@
         <th>Код клиента</th>
         <th>Код сотрудника</th>
     </tr>
-    {% for zayavka in zayavki %}
+    {% for zayavka in zayavka %}
     <tr>
         <td>{{ zayavka.id_zaya }}</td>
         <td>{{ zayavka.data_zaya }}</td>

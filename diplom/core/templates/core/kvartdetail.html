@@ -15,17 +15,37 @@
                     <img src="{{ MEDIA_URL }}{{ kv_v.image.url}}" class="img-thumbnail mx-auto d-block"
                          style="width:40rem">
                     <br><br>
-                    <a class="btn btn-primary btn-lg" href="{% url 'new_appl' %}">Оставить заявку</a>
+                    <hr class="my-2">
+                    <a class="ml-3 text-danger">* Ознакомительная информация</a>
+                    <div class="row">
+                        <div class="col">
+                            <a>Полная инфраструктура включает:</a>
+                            <p class="font-weight-light">🞄 Социально-бытовая (ЖКХ, торговля и банки и тд.)</p>
+                            <p class="font-weight-light">🞄 Социально-культурная (Все образовательные учереждения,
+                                здравохранения и тд.)</p>
+                        </div>
+                        <div class="col">
+                            <a>Не полная инфраструктура включает:</a>
+                            <p class="font-weight-light">🞄 Социально-бытовая (ЖКХ, торговля) </p>
+                            <p class="font-weight-light">🞄 Социально-культурная (Не все образовательные учереждения,
+                                здравохранения и тд.)</p>
+                        </div>
+                    </div>
+                    <p class="font-italic">(Подробности уточняйте у консультанта)</p>
+
+                    <hr class="my-2">
+                    <p>Для покупки данной квартиры необходимо, заполнив все поля, оставить заявку.</p>
+                    <br>
+                    <a class="btn btn-primary btn-lg" href="{% url 'new_cli' %}">Оставить заявку</a>
                 </div>
                 <div class="col-7">
-
-                    <h3 c>Объект застройки</h3>
-                    <table class="table ">
+                    <h3>Объект застройки</h3>
+                    <table class="table p-3 mb-2 bg-light text-dark">
                         <tr>
                             <th>Улица</th>
                             <th>{{ kv_v.street}}</th>
                         </tr>
-                        <tr>
+                        <tr class="text-primary">
                             <th>Вид жилья</th>
                             <th>{{ kv_v.naim_jil}}</th>
                         </tr>
@@ -37,7 +57,7 @@
                             <th>Количество этажей</th>
                             <th>{{ kv_v.kol_vo_et}}</th>
                         </tr>
-                        <tr>
+                        <tr class="text-primary">
                             <th>Парковка</th>
                             <th>{{ kv_v.parkov }}</th>
                         </tr>
@@ -47,7 +67,7 @@
                         </tr>
                         <tr>
                             <th>Социальная инфраструктура</th>
-                            <th>{{ kv_v.soc_infr}}</th>
+                            <th>{{ kv_v.soc_infr}} <a class="text-danger">*</a></th>
                         </tr>
                         <tr>
                             <th>Места для отдыха</th>
@@ -58,8 +78,8 @@
                     <hr class="my-4">
 
                     <h3>Квартира</h3>
-                    <table class="table">
-                        <tr>
+                    <table class="table p-3 mb-2 bg-light text-dark">
+                        <tr class="text-primary">
                             <th>Категория</th>
                             <th>{{ kv_v.naim_kat }}</th>
                         </tr>
@@ -72,19 +92,18 @@
                             <th>{{ kv_v.num_kv }}</th>
                         </tr>
                         <tr>
-                            <th> Количество комнат</th>
+                            <th>Количество комнат</th>
                             <th>{{ kv_v.kol_vo_kom }}</th>
                         </tr>
                         <tr>
-                            <th> Площадь</th>
-                            <th>{{ kv_v.area }}</th>
+                            <th>Площадь</th>
+                            <th>{{ kv_v.area }} кв.м.</th>
                         </tr>
-                        <tr>
-                            <th> Стоимость</th>
-                            <th>{{ kv_v.stoim }}</th>
+                        <tr class="text-danger">
+                            <th>Стоимость</th>
+                            <th>{{ kv_v.stoim }} ₽ </th>
                         </tr>
                     </table>
-
                 </div>
             </div>
         </div>

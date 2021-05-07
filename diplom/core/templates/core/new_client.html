@@ -12,11 +12,16 @@
 
         <form method="post">
             {% csrf_token %}
-            {{ formZ.num_zaya }}<br>
-            {{ formZ.data_zaya }}<br>
-            {{ formZ.id_kv }}<br>
-            {{ formZ.kod_client }}<br>
-            {{ formZ.kod_sotrudn }}<br>
+            {{ formC.kod_client }}
+            <br>
+            {{ formC.pasp }}
+            <br>
+            {{ formC.fio_client }}
+            <br>
+            {{ formC.phone }}
+            <br>
+            {{ formC.status }}
+            <br>
 
             <span>{{ error }}</span>
             <button class="btn btn-success" type="submit">Сохранить</button>
@@ -25,5 +30,6 @@
         </form>
     </div>
 </div>
+
 
 {%endblock%}
