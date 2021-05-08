@@ -6,7 +6,7 @@
 
 {% block body %}
 
-<h2 class="display-3 ml-1">Главная</h2>
+<!--<h2 class="display-3 ml-1">Главная</h2>-->
 <form>
     <div align=center>
         <a class="text-danger" href="{% url 'new_appl' %}">новая запись</a>
@@ -31,10 +31,10 @@
                         </div>
 
                         <div class="card-body  border border-warning">
-                            <!--                        <p> Номер этажа: {{ el.num_etag }} </p>-->
+
                             <p> Количество комнат: {{ el.kol_vo_kom }} </p>
                             <p> Стоимость: {{ el.stoim }} ₽ </p>
-                            <!--                        <p> Код категории: {{ el.kod_kategorii }} </p>-->
+
                             <a href="{% url 'kvartdeteil' el.id_kv %}" class="btn btn-outline-info">Подробнее</a>
                         </div>
                     </div>
@@ -42,7 +42,6 @@
                     <br>
                 </div>
                 {% endfor %}
-
             </div>
         </div>
         {% else %}

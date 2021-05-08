@@ -9,9 +9,9 @@ class ZayavkaForm(ModelForm):
 
         widgets = {
             "num_zaya": TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Номер заявки'
-        }),
+                'class': 'form-control',
+                'placeholder': 'Номер заявки'
+            }),
 
             "data_zaya": DateInput(attrs={
                 'class': 'form-control',
@@ -36,6 +36,7 @@ class ZayavkaForm(ModelForm):
 
 class ClientForm(ModelForm):
     class Meta:
+        CHOICES = [('Физическое', 'Физическое'), ('Юридическое', 'Юридическое')]
         model = Client
         fields = ['kod_client', 'pasp', 'fio_client', 'phone', 'status']
 
@@ -46,7 +47,8 @@ class ClientForm(ModelForm):
             }),
             "pasp": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Серия, номер паспорта'
+                'placeholder': 'Серия, номер паспорта',
+                'id': 'pasp'
             }),
             "fio_client": TextInput(attrs={
                 'class': 'form-control',
@@ -54,11 +56,13 @@ class ClientForm(ModelForm):
             }),
             "phone": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Телефон'
+                'placeholder': 'Телефон',
+                'id': 'phone'
             }),
-            "status": TextInput(attrs={
+            "status": Select(attrs={
                 'class': 'form-control',
-                'placeholder': 'Статус'
-            })
+                'placeholder': 'Статус',
+                'id': 'status'
+            }, choices=CHOICES)
 
         }

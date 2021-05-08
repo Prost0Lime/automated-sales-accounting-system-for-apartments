@@ -12,7 +12,7 @@ from django.utils.safestring import mark_safe
 
 
 class Client(models.Model):
-    kod_client = models.IntegerField(primary_key=True, verbose_name="Код клиента")
+    kod_client = models.AutoField(primary_key=True, verbose_name="Код клиента")
     pasp = models.CharField(max_length=40, verbose_name="Паспорт")
     fio_client = models.CharField(max_length=70, verbose_name="ФИО")
     phone = models.CharField(max_length=50, verbose_name="Телефон")
