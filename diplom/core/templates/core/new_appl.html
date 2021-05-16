@@ -12,11 +12,11 @@
 
         <form method="post">
             {% csrf_token %}
-            {{ formZ.num_zaya }}<br>
-            {{ formZ.data_zaya }}<br>
-            {{ formZ.id_kv }}<br>
-            {{ formZ.kod_client }}<br>
-            {{ formZ.kod_sotrudn }}<br>
+          Номер заявки  {{ formZ.num_zaya }}<br>
+          Дата заполнения  {{ formZ.data_zaya }}<br>
+          ID квартиры  {{ formZ.id_kv }}<br>
+          Код клиента  {{ formZ.kod_client }}<br>
+          Код сотрудника  {{ formZ.kod_sotrudn }}<br>
 
             <span>{{ error }}</span>
             <button class="btn btn-success" type="submit">Сохранить</button>

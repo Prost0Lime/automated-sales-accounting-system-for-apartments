@@ -18,12 +18,12 @@ class ZayavkaForm(ModelForm):
                 'type': 'date',
                 'placeholder': 'Дата заявки'
             }),
-            "id_kv": Select(attrs={
+            "id_kv": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ид квартиры'
+                'placeholder': 'Ид квартиры',
+                'readonly': True
             }),
-
-            "kod_client": Select(attrs={
+            "kod_client": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Код клиента'
             }),
