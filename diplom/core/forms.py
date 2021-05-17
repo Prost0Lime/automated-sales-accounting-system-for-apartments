@@ -5,18 +5,15 @@ from django.forms import ModelForm, TextInput, DateInput, Select
 class ZayavkaForm(ModelForm):
     class Meta:
         model = Zayavka
-        fields = ['num_zaya', 'data_zaya', 'id_kv', 'kod_client', 'kod_sotrudn']
+        fields = ['data_zaya', 'id_kv', 'kod_client', 'kod_sotrudn']
 
         widgets = {
-            "num_zaya": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Номер заявки'
-            }),
 
             "data_zaya": DateInput(attrs={
                 'class': 'form-control',
                 'type': 'date',
-                'placeholder': 'Дата заявки'
+                'placeholder': 'Дата заявки',
+
             }),
             "id_kv": TextInput(attrs={
                 'class': 'form-control',

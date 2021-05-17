@@ -7,10 +7,6 @@ def about(request):
     return render(request, 'core/about.html')
 
 
-def login(request):
-    return render(request, 'core/login.html')
-
-
 # получение данных из бд заявки панель сотрудника
 def employee(request):
     zayavka = Zayavka.objects.all()

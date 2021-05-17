@@ -195,7 +195,6 @@ class VidJil(models.Model):
 
 class Zayavka(models.Model):
     id_zaya = models.AutoField(primary_key=True, verbose_name="ИД заявки")
-    num_zaya = models.IntegerField(verbose_name="Номер заявки")
     data_zaya = models.DateField(verbose_name="Дата заполнения")
     id_kv = models.ForeignKey(Kvart, models.CASCADE, db_column='id_kv', verbose_name="ИД квартиры")
     kod_client = models.ForeignKey(Client, models.CASCADE, db_column='kod_client', verbose_name="Код клиента")
