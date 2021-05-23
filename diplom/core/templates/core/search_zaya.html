@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Поиск заявки
+{% endblock %}
+
+{% block body %}
+
+<script>
+        $(document).ready(function(){
+        $("#pasp").mask("9999 999999");
+         });
+
+</script>
+
+<form align=center>
+    <div class="col-6 mx-auto">
+        <h3 class="font-italic" style="color:#A52A2A">Поиск заявки</h3>
+        <hr class="my-3">
+        <div align=center class="form-group">
+            <br>
+            <label class="col-md control-label" for="textinput">Введите идентификатор заявки</label>
+            <div class="col-md">
+                <input name="ID_zaya" id="textinput" type="text" placeholder="ID заявки" class="form-control input-md">
+            </div>
+            <br>
+            <div align=center class="form-group">
+                <label class="col-md control-label">Введите серию и номер паспорта</label>
+                <div class="col-md">
+                    <input name="pasp" id="pasp" type="text" placeholder="Серия, номер паспорта"
+                           class="form-control input-md">
+                </div>
+            </div>
+
+        </div>
+        <hr class="my-4">
+        <div align=center class="form-group">
+            <div class="col-md-8">
+                <button id="ok" class="btn btn-primary">Подтвердить</button>
+                <button id="cancel" type="button" class="btn btn-warning"
+                        onclick="return location.href = '{% url 'home' %}'">Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

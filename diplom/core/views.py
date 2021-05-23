@@ -7,31 +7,17 @@ def about(request):
     return render(request, 'core/about.html')
 
 
-# получение данных из бд заявки панель сотрудника
-def employee(request):
-    zayavka = Zayavka.objects.all()
-    return render(request, 'core/employee.html', {'zayavka': zayavka})
+# вывод квартир
+def list_main(request):
+    menu = Kvart.objects.all()
+    return render(request, 'core/main.html', {'menu': menu})
 
 
-# сохранение данных в бд Новая заявка
-def createZayavka(request):
-    error = ''
-    if request.method == 'POST':
-        form = ZayavkaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            error = 'Форма заполнена не правильно'
-
-    form = ZayavkaForm()
-
-    data = {
-        'formZ': form,
-        'error': error
-    }
-
-    return render(request, 'core/new_appl.html', data)
+# Детали квартиры
+class KvartDelailView(DetailView):
+    model = KvartV
+    template_name = 'core/kvartdetail.html'
+    context_object_name = 'kv_v'
 
 
 # сохранение данных в бд Новый клиент
@@ -54,14 +40,50 @@ def createClient(request):
     return render(request, 'core/new_client.html', data)
 
 
-# вывод квартир на главный экран
-def list_main(request):
-    menu = Kvart.objects.all()
-    return render(request, 'core/main.html', {'menu': menu})
+# сохранение данных в бд Новая заявка
+def createZayavka(request, id_kv: int, kod_client: int):
+    error = ''
+    if request.method == 'POST':
+        form = ZayavkaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            id_zaya = form.instance.id_zaya
+            return redirect('appl_inf', id_kv=id_kv, kod_client=kod_client, id_zaya=id_zaya)
+        else:
+            error = 'Форма заполнена не правильно'
+
+    form = ZayavkaForm(initial={'id_kv': Kvart.objects.get(id_kv=id_kv),
+                                'kod_client': Client.objects.get(kod_client=kod_client)})
+
+    data = {
+        'formZ': form,
+        'error': error,
+
+    }
+    return render(request, 'core/new_appl.html', data)
 
 
-# Детали квартиры
-class KvartDelailView(DetailView):
-    model = KvartV
-    template_name = 'core/kvartdetail.html'
-    context_object_name = 'kv_v'
+# вывод информации о заполненной заявке
+def ZayaInf(request, id_kv: int, kod_client: int, id_zaya: int):
+    form = ZayavkaForm(initial={'id_kv': Kvart.objects.get(id_kv=id_kv),
+                                'kod_client': Client.objects.get(kod_client=kod_client)})
+    data = {
+        'formZ': form,
+        'id_zaya': id_zaya,
+
+    }
+    return render(request, 'core/appl_inf.html', data)
+
+
+# Поиск заявки
+def SearchZaya(request):
+    id_zaya = request.GET.get('id_zaya', 'default')
+    pasp = request.GET.get('pasp', 'default')
+    return render(request, 'core/search_zaya.html')
+
+
+# вывод информации о заявке по поиску
+class ZayavkaV(DetailView):
+    model = ZayavkaV
+    template_name = 'core/information.html'
+    context_object_name = 'zaya'

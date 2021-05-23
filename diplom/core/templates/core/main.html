@@ -6,22 +6,18 @@
 
 {% block body %}
 
-<!--<h2 class="display-3 ml-1">Главная</h2>-->
 <form>
-    <div align=center>
-        <a class="text-dark" href="{% url 'employee' %}">панель сотрудника</a>
-        <br>
-        <h2 class="display-6 ">Список квартир</h2>
-        <br><br>
-    </div>
     <div class="display">
         <div align=center class="container">
+             <h2 class="display-6 font-italic" style="color:#E18732">Список квартир</h2>
+        <hr class="my-3">
+            <br>
             <div class="row">
                 {% if menu %}
                 {% for el in menu %}
 
                 <div class="col">
-                    <div class="card indent" style="width: 20rem; height: 26rem">
+                    <div class="card indent bg-primary " style="width: 20rem; height: 26rem">
                         <div class="card-img-top">
                             {% if el.image %}
                             <img src="{{ MEDIA_URL }}{{ el.image.url}}" class="img-fluid" style="height: 15rem">

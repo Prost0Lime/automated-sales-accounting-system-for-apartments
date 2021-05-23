@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Панель сотрудника
+{% endblock %}
+
+{% block body %}
+<div align=center class="card bg-primary">
+    <div class="card-header ">
+        <h4 class="font-italic" style="color:#E18732">Информация по заявке</h4>
+    </div>
+
+    <br>
+    <form>
+        <div align="center">
+            <div style="width: 95%">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="font-italic" style="color:#A52A2A">Покупатель</h3>
+                        <table class="table p-3 mb-2 bg-light text-dark">
+                            <tr class="text-info">
+                                <th>Код покупателя</th>
+                                <th>{{ zaya.kod_client }}</th>
+                            </tr>
+                            <tr class="text-danger">
+                                <th>Фамилия Имя Отчество</th>
+                                <th>{{ zaya.fio_client }}</th>
+                            </tr>
+                            <tr class="text-danger">
+                                <th>Серия и номер паспорта</th>
+                                <th>{{ zaya.pasp }}</th>
+                            </tr>
+                            <tr class="text-primary">
+                                <th>Телефон</th>
+                                <th>{{ zaya.phone }}</th>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="col">
+                        <h3 class="font-italic" style="color:#A52A2A">Заявка</h3>
+                        <table class="table p-3 mb-2 bg-light text-dark">
+                            <tr class="text-info">
+                                <th>Идентификатор заявки</th>
+                                <th>{{ zaya.id_zaya }}</th>
+                            </tr>
+                            <tr class="text-primary">
+                                <th>Дата заполниния</th>
+                                <th>{{ zaya.data_zaya }}</th>
+                            </tr>
+
+                        </table>
+
+                        <hr class="my-5">
+
+                        <h3 class="font-italic" style="color:#A52A2A">Квартира</h3>
+                        <table class="table p-3 mb-2 bg-light text-dark">
+                            <tr class="text-success">
+                                <th>Улица</th>
+                                <th>{{ zaya.street }}</th>
+                            </tr>
+                            <tr class="text-success">
+                                <th>Номер здания</th>
+                                <th>{{ zaya.num_zd }}</th>
+                            </tr>
+                            <tr class="text-success">
+                                <th>Номер квартиры</th>
+                                <th>{{ zaya.num_kv }}</th>
+                            </tr>
+                            <tr class="text-danger">
+                                <th>Стоимость</th>
+                                <th>{{ zaya.stoim }} ₽</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <button type="button" class="btn btn-outline-warning">Назад</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

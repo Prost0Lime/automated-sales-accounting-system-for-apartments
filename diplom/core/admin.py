@@ -22,7 +22,8 @@ class KnOplatInline(admin.TabularInline):
 @admin.register(DogovorProd)
 class DogovorProdAdmin(admin.ModelAdmin):
     list_display = ["id_dog", "num_dog", "date_sost", "date_prod", "sum_dog", "opl", "id_zaya", "kod_sotrudn"]
-    search_fields = ["num_dog", "date_sost", "id_zaya", "date_prod"]
+    search_fields = ["num_dog", "date_sost", "date_prod"]
+    readonly_fields = ("sum_dog", "opl")
     list_filter = ["kod_sotrudn"]
     ordering = ["id_dog"]
     inlines = [KnOplatInline]
@@ -31,14 +32,14 @@ class DogovorProdAdmin(admin.ModelAdmin):
 @admin.register(KategKvart)
 class KategKvartAdmin(admin.ModelAdmin):
     list_display = ["kod_kategorii", "naim_kat"]
-    search_fields = ["naim_kat"]
+    search_fields = ["kod_kategorii", "naim_kat"]
     ordering = ["kod_kategorii"]
 
 
 @admin.register(KnOplat)
 class KnOplatAdmin(admin.ModelAdmin):
     list_display = ["id_oplt", "date_opl", "sum_opl", "id_dog"]
-    search_fields = ["date_opl", "id_dog"]
+    search_fields = ["date_opl", "sum_opl"]
     ordering = ["id_oplt"]
 
 
@@ -69,19 +70,19 @@ class ProdKvAdmin(admin.ModelAdmin):
 class SotrudnAdmin(admin.ModelAdmin):
     list_display = ["kod_sotrudn", "fio", "dolz"]
     list_filter = ["dolz"]
-    search_fields = ["fio"]
+    search_fields = ["kod_sotrudn", "fio", "dolz"]
     ordering = ["kod_sotrudn"]
 
 
 @admin.register(VidJil)
 class VidJilAdmin(admin.ModelAdmin):
     list_display = ["kod_vida", "naim_jil"]
-    search_fields = ["naim_jil"]
+    search_fields = ["kod_vida", "naim_jil"]
     ordering = ["kod_vida"]
 
 
 @admin.register(Zayavka)
 class ZayavkaAdmin(admin.ModelAdmin):
-    list_display = ["id_zaya", "data_zaya", "id_kv", "kod_client", "kod_sotrudn"]
-    search_fields = ["data_zaya"]
+    list_display = ["id_zaya", "kod_sotrudn", "data_zaya", "id_kv", "kod_client"]
+    search_fields = ["id_zaya", "kod_client__fio_client", "kod_sotrudn__fio", "data_zaya"]
     ordering = ["id_zaya"]

@@ -7,7 +7,6 @@
 {% block body %}
 
 <form>
-
     <div align="center">
         <div class="" style="width: 95%">
             <div class="row">
@@ -39,23 +38,23 @@
                     <a class="btn btn-warning btn-lg" href="{% url 'new_cli' %}">Оставить заявку</a>
                 </div>
                 <div class="col-7">
-                    <h3>Объект застройки</h3>
+                    <h3 class="font-italic" style="color:#A52A2A">Объект застройки</h3>
                     <table class="table p-3 mb-2 bg-light text-dark">
                         <tr>
                             <th>Улица</th>
-                            <th>{{ kv_v.street}}</th>
+                            <th>{{ kv_v.street }}</th>
                         </tr>
                         <tr class="text-primary">
                             <th>Вид жилья</th>
-                            <th>{{ kv_v.naim_jil}}</th>
+                            <th>{{ kv_v.naim_jil }}</th>
                         </tr>
                         <tr>
                             <th>Номер здания</th>
-                            <th>{{ kv_v.num_zd}}</th>
+                            <th>{{ kv_v.num_zd }}</th>
                         </tr>
                         <tr>
                             <th>Количество этажей</th>
-                            <th>{{ kv_v.kol_vo_et}}</th>
+                            <th>{{ kv_v.kol_vo_et }}</th>
                         </tr>
                         <tr class="text-primary">
                             <th>Парковка</th>
@@ -63,21 +62,21 @@
                         </tr>
                         <tr>
                             <th>Транспортная доступность</th>
-                            <th>{{ kv_v.trans_dos}}</th>
+                            <th>{{ kv_v.trans_dos }}</th>
                         </tr>
                         <tr>
                             <th>Социальная инфраструктура</th>
-                            <th>{{ kv_v.soc_infr}} <a class="text-danger">*</a></th>
+                            <th>{{ kv_v.soc_infr }} <a class="text-danger">*</a></th>
                         </tr>
                         <tr>
                             <th>Места для отдыха</th>
-                            <th>{{ kv_v.rekreaciya}}</th>
+                            <th>{{ kv_v.rekreaciya }}</th>
                         </tr>
                     </table>
 
                     <hr class="my-4">
 
-                    <h3>Квартира</h3>
+                    <h3 class="font-italic" style="color:#A52A2A">Квартира</h3>
                     <table class="table p-3 mb-2 bg-light text-dark">
                         <tr class="text-primary">
                             <th>Категория</th>

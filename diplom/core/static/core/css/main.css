@@ -27,5 +27,9 @@ width: .7em;
 width: 1ch;
 text-align: center;
 word-wrap: break-word;
+}
 
+
+.bg-primary {
+    background-color: #FFFFFA!important;
 }

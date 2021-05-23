@@ -29,13 +29,14 @@ class Client(models.Model):
 
 
 class DogovorProd(models.Model):
+    readonly_fields = ("sum_dog",)
     id_dog = models.AutoField(primary_key=True, verbose_name="ИД договора")
     num_dog = models.IntegerField(verbose_name="Номер договора")
     date_sost = models.DateField(verbose_name="Дата составления")
     date_prod = models.DateField(verbose_name="Дата продажи")
-    sum_dog = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True,
+    sum_dog = models.DecimalField(max_digits=9, decimal_places=2, default=0, blank=True,
                                   verbose_name="Сумма по договору")
-    opl = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True,
+    opl = models.DecimalField(max_digits=9, decimal_places=2, default=0, blank=True,
                               verbose_name="Оплачено по договору")
     id_zaya = models.ForeignKey('Zayavka', models.CASCADE, db_column='id_zaya', verbose_name="ИД заявки",
                                 related_name='dogovors')
@@ -151,8 +152,6 @@ class ObjZastroi(models.Model):
 class ProdKv(models.Model):
     id_prod = models.AutoField(primary_key=True, verbose_name="ИД продажи")
     id_dog = models.ForeignKey(DogovorProd, models.CASCADE, db_column='id_dog', verbose_name="ИД договора")
-    id_kv = models.ForeignKey(Kvart, models.CASCADE, db_column='id_kv', verbose_name="ИД квартиры")
-    stoim = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True, verbose_name="Стоимость")
 
     def __str__(self):
         return "{id_prod}".format(id_prod=self.id_prod)
@@ -198,7 +197,8 @@ class Zayavka(models.Model):
     data_zaya = models.DateField(verbose_name="Дата заполнения")
     id_kv = models.ForeignKey(Kvart, models.CASCADE, db_column='id_kv', verbose_name="ИД квартиры")
     kod_client = models.ForeignKey(Client, models.CASCADE, db_column='kod_client', verbose_name="Код клиента")
-    kod_sotrudn = models.ForeignKey(Sotrudn, models.CASCADE, db_column='kod_sotrudn', verbose_name="Код сотрудника")
+    kod_sotrudn = models.ForeignKey(Sotrudn, models.CASCADE, blank=True, null=True, db_column='kod_sotrudn',
+                                    verbose_name="Код сотрудника")
 
     def __str__(self):
         return "{id_zaya}".format(id_zaya=self.id_zaya)
@@ -211,7 +211,7 @@ class Zayavka(models.Model):
 
 
 class KvartV(models.Model):
-    id_kv = models.AutoField(primary_key=True, verbose_name="ИД квартиры")
+    id_kv = models.AutoField(primary_key=True)
     num_etag = models.IntegerField()
     num_kv = models.CharField(max_length=50)
     kol_vo_kom = models.IntegerField()
@@ -236,3 +236,23 @@ class KvartV(models.Model):
     class Meta:
         managed = False
         db_table = "kvart_v"
+
+
+class ZayavkaV(models.Model):
+    id_zaya = models.AutoField(primary_key=True)
+    data_zaya = models.DateField()
+    street = models.CharField(max_length=50)
+    num_zd = models.CharField(max_length=20)
+    num_kv = models.IntegerField()
+    stoim = models.DecimalField(max_digits=9, decimal_places=2)
+    kod_client = models.IntegerField()
+    fio_client = models.CharField(max_length=70)
+    pasp = models.CharField(max_length=40)
+    phone = models.CharField(max_length=40)
+
+    def __str__(self):
+        return "{id_zaya}".format(id_kv=self.id_zaya)
+
+    class Meta:
+        managed = False
+        db_table = "zayavka_v"
