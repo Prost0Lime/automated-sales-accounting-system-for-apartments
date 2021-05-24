@@ -1,13 +1,13 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-Панель сотрудника
+Информация по заявке
 {% endblock %}
 
 {% block body %}
-<div align=center class="card bg-primary">
-    <div class="card-header ">
-        <h4 class="font-italic" style="color:#E18732">Информация по заявке</h4>
+<div align=center class="card bg-primary mx-auto" style="width: 92rem; height: 42rem">
+    <div class="card-header">
+        <h2 class="font-italic" style="color:#FF6347">Информация по заявке</h2>
     </div>
 
     <br>
@@ -16,8 +16,8 @@
             <div style="width: 95%">
                 <div class="row">
                     <div class="col">
-                        <h3 class="font-italic" style="color:#A52A2A">Покупатель</h3>
-                        <table class="table p-3 mb-2 bg-light text-dark">
+                        <h3 class="font-italic">Покупатель</h3>
+                        <table class="table p-3 mb-2 bg-light text-dark rounded">
                             <tr class="text-info">
                                 <th>Код покупателя</th>
                                 <th>{{ zaya.kod_client }}</th>
@@ -39,8 +39,8 @@
                     </div>
 
                     <div class="col">
-                        <h3 class="font-italic" style="color:#A52A2A">Заявка</h3>
-                        <table class="table p-3 mb-2 bg-light text-dark">
+                        <h3 class="font-italic">Заявка</h3>
+                        <table class="table p-3 mb-2 bg-light text-dark rounded">
                             <tr class="text-info">
                                 <th>Идентификатор заявки</th>
                                 <th>{{ zaya.id_zaya }}</th>
@@ -54,8 +54,8 @@
 
                         <hr class="my-5">
 
-                        <h3 class="font-italic" style="color:#A52A2A">Квартира</h3>
-                        <table class="table p-3 mb-2 bg-light text-dark">
+                        <h3 class="font-italic">Квартира</h3>
+                        <table class="table p-3 mb-2 bg-light text-dark rounded">
                             <tr class="text-success">
                                 <th>Улица</th>
                                 <th>{{ zaya.street }}</th>

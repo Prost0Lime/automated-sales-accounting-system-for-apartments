@@ -8,8 +8,10 @@
 <div class="col-6 mx-auto">
 
     <div align=center>
-        <h3 class="font-italic" style="color:#A52A2A">Основные данные по этой заявке</h3>
-        <hr class="my-3">
+        <div class="card-header ">
+            <h2 class="font-italic">Основные данные по этой заявке</h2>
+        </div>
+        <br>
         <h5 class="text-primary">Запомните выделенные <a class="text-danger">красным</a> поля!</h5>
         <p class="font-weight-light">Они понадобятся для поиска полной информации по заявке.</p>
         <hr class="my-3">
@@ -28,7 +30,7 @@
             </div>
             <br>
         </div>
-           <hr class="my-3">
+        <hr class="my-3">
         <button class="btn btn-outline-primary" type="button"
                 onclick="return location.href = '{% url 'home' %}'">На главную
         </button>

@@ -33,3 +33,13 @@ word-wrap: break-word;
 .bg-primary {
     background-color: #FFFFFA!important;
 }
+
+
+h2 {
+    text-shadow: 2px 3px 5px #D8BFD8;
+    color: #FF6347;
+}
+
+h3 {
+    color: #7B68EE;
+}

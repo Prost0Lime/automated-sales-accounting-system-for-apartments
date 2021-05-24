@@ -77,9 +77,25 @@ def ZayaInf(request, id_kv: int, kod_client: int, id_zaya: int):
 
 # Поиск заявки
 def SearchZaya(request):
-    id_zaya = request.GET.get('id_zaya', 'default')
-    pasp = request.GET.get('pasp', 'default')
-    return render(request, 'core/search_zaya.html')
+    error = ''
+    if request.method == 'POST':
+        form = ZayaInfForm(request.POST)
+        if form.is_valid():
+            id_zaya = form.cleaned_data["id_zaya"]
+            pasp = form.cleaned_data["pasp"]
+            return redirect('information', pk=id_zaya, pasp=pasp)
+        else:
+            error = 'Форма заполнена не правильно'
+
+    form = ZayaInfForm()
+
+    data = {
+        'formS': form,
+        'error': error,
+
+    }
+
+    return render(request, 'core/search_zaya.html', data)
 
 
 # вывод информации о заявке по поиску
@@ -87,3 +103,7 @@ class ZayavkaV(DetailView):
     model = ZayavkaV
     template_name = 'core/information.html'
     context_object_name = 'zaya'
+
+    def get(self, request, pk, pasp, *args, **kwargs):
+        print(pk, pasp)
+        return super(ZayavkaV, self).get(request, *args, **kwargs)

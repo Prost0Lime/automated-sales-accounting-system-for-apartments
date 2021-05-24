@@ -11,7 +11,7 @@ urlpatterns = [
     path('new_zayavka/<int:id_kv>/<int:kod_client>', views.createZayavka, name='new_zayavka'),  # Для новой заявки
     path('appl_inf/<int:id_kv>/<int:kod_client>/<int:id_zaya>', views.ZayaInf, name='appl_inf'),  # Информация о заявке
     path('zayavka/', views.SearchZaya, name='zayavka_inf'),  # ввод данных для вывода заявки
-    path('information/<int:pk>', views.ZayavkaV.as_view(), name='information'),  # вывод информации по заявке
+    path('information/(?P<pk>[0-9]+)/(?P<pasp>[-a-zA-Z0-9_]+)/$', views.ZayavkaV.as_view(), name='information'),  # вывод информации по заявке
 
 
 

@@ -1,5 +1,5 @@
 from .models import *
-from django.forms import ModelForm, TextInput, DateInput, Select
+from django.forms import ModelForm, TextInput, DateInput, Select, Form, DateField, CharField
 
 
 class ZayavkaForm(ModelForm):
@@ -63,3 +63,8 @@ class ClientForm(ModelForm):
             }, choices=CHOICES)
 
         }
+
+
+class ZayaInfForm(Form):
+    id_zaya = CharField(widget=TextInput(attrs={'class':'form-control', 'placeholder':'ИД заявки'}))
+    pasp = CharField(widget=TextInput(attrs={'class':'form-control', 'placeholder':'Паспорт','id':'pasp'}))
