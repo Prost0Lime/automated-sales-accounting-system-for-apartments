@@ -1,22 +1,48 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% block title %}
 О нас
 {% endblock %}
 
 {% block body %}
-<div class="card bg-primary mx-auto" style="width: 92rem; height: 42rem">
+<div class="card bg-primary mx-auto" style="width: 92rem; height: 60rem">
     <h2 align=center class="card-header"> О нас</h2>
     <br>
     <div align="center">
         <h4 class="font-weight-bold">Мы - одна из крупнейших девелоперских компаний России.</h4>
         <h4 class="font-weight-light">Основана в 2020 году.</h4>
-        <h4 class="font-weight-light">Наша специализация - строительство и реализация различных видов жилья начиная от эконом-класса до элитного
+        <h4 class="font-weight-light">Наша специализация - строительство и реализация различных видов жилья начиная от
+            эконом-класса до элитного
             жилья.</h4>
-        <h4 class="font-weight-light">С начала основания было построенно свыше ста объетов, которые включают множество категорий жилых
+        <h4 class="font-weight-light">С начала основания было построенно свыше ста объетов, которые включают множество
+            категорий жилых
             помещений.
             Большая часть построенных объектов располагается в Москве и Московской области.</h4>
     </div>
+    <br>
+
+    <div align="center">
+        <img src="{% static 'core/img/about.png' %}" class="img-fluid img-thumbnail" alt="О нас" style="width:40rem">
+        <br><br>
+        <hr class="my-2">
+        <h2 class="font-weight-italic mx-auto"> Контакты</h2>
+    </div>
+    <div align="center" class="card-header">
+        <div class="row">
+            <div class="col">
+                <h3 class="display-6 font-italic">Телефон</h3>
+                <hr class="my-2">
+                <h4>+7(968) 828-33-03</h4>
+            </div>
+            <div class="col">
+                <h3 class="display-6 font-italic">Почта</h3>
+                <hr class="my-2">
+                <h4>84646@stud.rguk.ru</h4>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
 </div>
 
 {% endblock %}

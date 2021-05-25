@@ -12,13 +12,12 @@
          });
 
 
-
 </script>
 
 <form method="post">
     {% csrf_token %}
-    <div class="col-6 mx-auto">
-        <h3 class="font-italic">Поиск заявки</h3>
+    <div class="col-6 mx-auto card-header rounded border border-info">
+        <h3 align=center class="font-italic">Поиск заявки</h3>
         <hr class="my-3">
         <div align=center class="form-group">
             <br>
@@ -43,6 +42,7 @@
             </div>
         </div>
     </div>
+    <span>{{ error }}</span>
 </form>
 
 {% endblock %}
