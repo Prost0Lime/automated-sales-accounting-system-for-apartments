@@ -66,5 +66,5 @@ class ClientForm(ModelForm):
 
 
 class ZayaInfForm(Form):
-    id_zaya = CharField(widget=TextInput(attrs={'class':'form-control', 'placeholder':'ИД заявки'}))
-    pasp = CharField(widget=TextInput(attrs={'class':'form-control', 'placeholder':'Паспорт','id':'pasp'}))
+    id_zaya = CharField(widget=TextInput(attrs={'class':'form-control', 'placeholder':'Идентификатор заявки'}))
+    pasp = CharField(widget=TextInput(attrs={'class':'form-control', 'placeholder':'Серия номер паспорта','id':'pasp'}))
