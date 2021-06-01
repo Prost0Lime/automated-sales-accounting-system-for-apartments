@@ -39,7 +39,7 @@ class KategKvartAdmin(admin.ModelAdmin):
 @admin.register(KnOplat)
 class KnOplatAdmin(admin.ModelAdmin):
     list_display = ["id_oplt", "date_opl", "sum_opl", "id_dog"]
-    search_fields = ["date_opl", "sum_opl"]
+    search_fields = ["date_opl", "sum_opl", "id_oplt"]
     ordering = ["id_oplt"]
 
 
@@ -48,7 +48,7 @@ class KvartAdmin(admin.ModelAdmin):
     list_display = ["id_kv", "num_etag", "num_kv", "kol_vo_kom", "area", "stoim", "num_obj", "kod_kategorii",
                     "image_img"]
     readonly_fields = ('image_img',)
-    list_filter = ["num_etag", "kol_vo_kom"]
+    list_filter = ["num_etag", "kol_vo_kom", "stoim"]
     ordering = ["id_kv"]
 
 
@@ -56,7 +56,9 @@ class KvartAdmin(admin.ModelAdmin):
 class ObjZastroiAdmin(admin.ModelAdmin):
     list_display = ["num_obj", "street", "num_zd", "kol_vo_et", "kod_vida", "trans_dos", "soc_infr", "rekreaciya",
                     "parkov"]
-    list_filter = ["street"]
+    list_filter = ["street", "soc_infr", "parkov"]
+    search_fields = ["num_obj", "street", "num_zd", "kol_vo_et", "kod_vida__naim_jil", "trans_dos", "soc_infr", "rekreaciya",
+                    "parkov"]
     ordering = ["num_obj"]
 
 
@@ -64,7 +66,7 @@ class ObjZastroiAdmin(admin.ModelAdmin):
 class ProdKvAdmin(admin.ModelAdmin):
     list_display = ["id_prod", "id_dog"]
     ordering = ["id_prod"]
-
+    list_filter = ["id_dog__date_prod"]
 
 @admin.register(Sotrudn)
 class SotrudnAdmin(admin.ModelAdmin):
@@ -84,5 +86,6 @@ class VidJilAdmin(admin.ModelAdmin):
 @admin.register(Zayavka)
 class ZayavkaAdmin(admin.ModelAdmin):
     list_display = ["id_zaya", "kod_sotrudn", "data_zaya", "id_kv", "kod_client"]
-    search_fields = ["id_zaya", "kod_client__fio_client", "kod_sotrudn__fio", "data_zaya"]
-    ordering = ["id_zaya"]
+    search_fields = ["id_zaya", "kod_client__fio_client", "kod_sotrudn__fio", "data_zaya", "id_kv__stoim"]
+    list_filter = ["data_zaya"]
+    ordering = ["id_zaya", "data_zaya"]
